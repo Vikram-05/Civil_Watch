@@ -1,7 +1,7 @@
 
 import './ReportCategory.css'
 
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/free-mode';
@@ -13,7 +13,19 @@ import { FaRoad } from "react-icons/fa";
 import { TbSunElectricity } from "react-icons/tb";
 import { FaHandHoldingWater } from "react-icons/fa";
 
+import {Link} from 'react-router-dom'
+
 function ReportCategory() {
+    const [isLogin,setIsLogin] = useState(false);
+    const token = localStorage.getItem('token');
+    useEffect(()=>{
+        if(token){
+            setIsLogin(true)
+        }else{
+            setIsLogin(false)
+        }
+
+    },[])
     return (
         <>
             <div className="category_contaner">
@@ -45,13 +57,13 @@ function ReportCategory() {
                       }}
                 >
                     <SwiperSlide>
-                        <div className="slide_con">
+                        <Link to={ isLogin == true ? "/reportIssue" : '/login'} className="slide_con">
                             <div className="icon_con">
                             <IoTrashSharp/>
                             </div>
                             <span>Waste</span>
                             <p>Santitation issues</p>
-                        </div>
+                        </Link>
                     </SwiperSlide>
 
 
