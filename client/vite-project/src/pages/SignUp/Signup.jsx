@@ -56,7 +56,7 @@ function Signup() {
             wardNumber: values.wardNumber
         };
         try {
-            const response = await axios.post('http://localhost:6500/api/users/register', formData);
+            const response = await axios.post('https://civil-watch.onrender.com/api/users/register', formData);
             navigate('/login')
             toast.success(response.data.message)
         } catch (error) {
