@@ -56,7 +56,7 @@ export default function RepresentativeDashboard({ timeAgo }) {
       first_name: updateData.firstName,
       last_name: updateData.lastName
     }
-    const response = await axios.post(`http://localhost:6500/api/users/editprofile/${user_id}`, formData)
+    const response = await axios.post(`https://civil-watch.onrender.com/api/users/editprofile/${user_id}`, formData)
     toast("Update Seccessful")
     handleClose()
     setrepresentativeDatas((prevData) => ({
@@ -89,7 +89,7 @@ export default function RepresentativeDashboard({ timeAgo }) {
     const userId = localStorage.getItem('user_id')
     const repData = async (e) => {
       try {
-        const response = await axios.get(`http://localhost:6500/api/users/${userId}`)
+        const response = await axios.get(`https://civil-watch.onrender.com/api/users/${userId}`)
         // console.log("res : ", response.data)
         setrepresentativeDatas({
           email: response.data.email,
@@ -108,7 +108,7 @@ export default function RepresentativeDashboard({ timeAgo }) {
 
     const problemsUnderYou = async (e) => {
       try {
-        const response = await axios.get(`http://localhost:6500/api/users/problem/problemUnderRep/${userId}`)
+        const response = await axios.get(`https://civil-watch.onrender.com/api/users/problem/problemUnderRep/${userId}`)
         setProblemUnderYourArea(response.data.AllProblemData)
         // console.log("problem Data : ", response.data.AllProblemData)
       } catch (error) {
@@ -122,7 +122,7 @@ export default function RepresentativeDashboard({ timeAgo }) {
       const user_id = localStorage.getItem('user_id')
       let total = 0;
       try {
-        const res = await axios.get(`http://localhost:6500/api/users/credit/getSimilarRep/${user_id}`)
+        const res = await axios.get(`https://civil-watch.onrender.com/api/users/credit/getSimilarRep/${user_id}`)
         // setRepCredit(res.data)
         for (let score of res.data.AllRepresentative) {
           total += score.credit_score;
@@ -141,12 +141,12 @@ export default function RepresentativeDashboard({ timeAgo }) {
     const handleAllReviews = async () => {
     const user_id = localStorage.getItem('user_id')
     try {
-      const res = await axios.get(`http://localhost:6500/api/users/credit/getSimilarRep/${user_id}`);
+      const res = await axios.get(`https://civil-watch.onrender.com/api/users/credit/getSimilarRep/${user_id}`);
       setAllReview(res.data.AllRepresentative);
 
       // Create a list of promises to fetch user data for each review
       const userNamesPromises = res.data.AllRepresentative.map(async (review) => {
-        const userRes = await axios.get(`http://localhost:6500/api/users/${review.user_id}`);
+        const userRes = await axios.get(`https://civil-watch.onrender.com/api/users/${review.user_id}`);
         return { userId: review.user_id, name: `${userRes.data.first_name} ${userRes.data.last_name}` };
       });
 
@@ -194,9 +194,9 @@ export default function RepresentativeDashboard({ timeAgo }) {
   // Function to open the modal for a specific task
   const handleOpenDetails = async (taskId) => {
     setOpenDetails(taskId);
-    const problemData = await axios.get(`http://localhost:6500/api/users/problem/getProblemData/${taskId}`)
+    const problemData = await axios.get(`https://civil-watch.onrender.com/api/users/problem/getProblemData/${taskId}`)
     const { description, district, location, severity, state, status, title, wardNumber, user_id, images } = problemData.data.data;
-    const UserData = await axios.get(`http://localhost:6500/api/users/${user_id}`)
+    const UserData = await axios.get(`https://civil-watch.onrender.com/api/users/${user_id}`)
     const { email, first_name, last_name } = UserData.data
     setDetailData({
       description: description,
@@ -229,7 +229,7 @@ export default function RepresentativeDashboard({ timeAgo }) {
     try {
       const assignToId = localStorage.getItem('user_id')
 
-      const response = await axios.put(`http://localhost:6500/api/users/problem/updateStatus/${problem_id}`, { status: status, assignTo_id: assignToId });
+      const response = await axios.put(`https://civil-watch.onrender.com/api/users/problem/updateStatus/${problem_id}`, { status: status, assignTo_id: assignToId });
 
 
       setProblemUnderYourArea(prevState =>
