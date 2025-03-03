@@ -22,10 +22,10 @@ function RepresentativeProfile() {
         const fetchData = async () => {
             try {
                 console.log("Fetching representative data for ID:", id);
-                const response = await axios.get(`https://images.pexels.com/api/users/representativeProfile/${id}`);
+                const response = await axios.get(`https://civilwatch.onrender.com/api/users/representativeProfile/${id}`);
                 setRepresentativeData(response.data.data);
                 let total = 0;
-                const res = await axios.get(`https://images.pexels.com/api/users/credit/getSimilarRep/${id}`)
+                const res = await axios.get(`https://civilwatch.onrender.com/api/users/credit/getSimilarRep/${id}`)
                 for (let score of res.data.AllRepresentative) {
                     total += score.credit_score;
                 }
@@ -35,7 +35,7 @@ function RepresentativeProfile() {
 
                 // Create a list of promises to fetch user data for each review
                 const userNamesPromises = res.data.AllRepresentative.map(async (review) => {
-                    const userRes = await axios.get(`https://images.pexels.com/api/users/${review.user_id}`);
+                    const userRes = await axios.get(`https://civilwatch.onrender.com/api/users/${review.user_id}`);
                     return { userId: review.user_id, name: `${userRes.data.first_name} ${userRes.data.last_name}` };
                 });
 
@@ -61,8 +61,8 @@ function RepresentativeProfile() {
             fetchData();
         }
     }, [id]);
-    if(!representativeData) {
-       return <p className='loader'>Loading...</p>; // You can show a loading spinner or message
+    if (!representativeData) {
+        return <p className='loader'>Loading...</p>; // You can show a loading spinner or message
     }
 
 
