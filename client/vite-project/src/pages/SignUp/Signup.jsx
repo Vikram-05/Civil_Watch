@@ -1,4 +1,4 @@
-limport React, { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import './Signup.css'
 import { MdOutlineMail } from "react-icons/md";
 import { RiLockPasswordLine } from "react-icons/ri";
