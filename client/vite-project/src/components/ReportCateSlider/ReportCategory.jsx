@@ -2,6 +2,9 @@
 import './ReportCategory.css'
 
 import React, { useEffect, useRef, useState } from 'react';
+import { Navigation } from 'swiper/modules';
+import 'swiper/css/navigation';
+
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/free-mode';
@@ -35,7 +38,8 @@ function ReportCategory() {
                     spaceBetween={10}
                     freeMode={true}
                     pagination={false}
-                    modules={[FreeMode, Pagination]}
+                    navigation={true}
+                    modules={[FreeMode, Pagination,Navigation]}
                     className="mySwiper swiper_report"
                     breakpoints={{
                         // When the viewport width is >= 320px
