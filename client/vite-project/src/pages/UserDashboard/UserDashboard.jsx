@@ -228,7 +228,7 @@ function UserDashboard({ timeAgo }) {
                             <MdOutlineReportGmailerrorred />
                         </div>
                         <span className='name_user'>Active issues</span>
-                        <p className='date_user resolved_status '>{`${problemDatas.filter(item => item.status != "resolved").length} panding reports`} </p>
+                        <p className='date_user resolved_status '>{`${problemDatas.filter(item => item.status != "resolved").length} pending reports`} </p>
                         <p className='date_user resolved_status'>{`${problemDatas.filter(item => item.status == "resolved").length} resolved reports`} </p>
                         <Link to="/reportIssue"><button className="Report_new">Report New</button></Link>
                     </div>
