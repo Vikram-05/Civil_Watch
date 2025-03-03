@@ -61,9 +61,9 @@ function RepresentativeProfile() {
             fetchData();
         }
     }, [id]);
-    if (!representativeData) {
-        return <p className='loader'>Loading...</p>; // You can show a loading spinner or message
-    }
+    //if (!representativeData) {
+   //     return <p className='loader'>Loading...</p>; // You can show a loading spinner or message
+    //}
 
 
 
