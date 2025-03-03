@@ -7,6 +7,8 @@ import 'swiper/css/free-mode';
 import 'swiper/css/pagination';
 import { FreeMode, Pagination } from 'swiper/modules';
 import { IoTrashSharp } from "react-icons/io5";
+import { Navigation } from 'swiper/modules';
+import 'swiper/css/navigation';
 
 
 import { MdOutlineReport } from "react-icons/md";
@@ -24,7 +26,8 @@ function WorksCategory() {
                     spaceBetween={10}
                     freeMode={true}
                     pagination={false}
-                    modules={[FreeMode, Pagination]}
+                    navigation={true}
+                    modules={[FreeMode, Pagination,Navigation]}
                     className="mySwiper swiper_work"
                     breakpoints={{
                         // When the viewport width is >= 320px
