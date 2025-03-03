@@ -61,7 +61,7 @@ function UserDashboard({ timeAgo }) {
     useEffect(() => {
         const user_id = localStorage.getItem('user_id')
 
-        const response = axios.get(`http://localhost:6500/api/users/${user_id}`)
+        const response = axios.get(`https://civil-watch.onrender.com/api/users/${user_id}`)
             .then(response => {
                 //   const date = (response.data.created_at).split('-')[0]
                 //   console.log("data : ",date)
@@ -91,7 +91,7 @@ function UserDashboard({ timeAgo }) {
             first_name: updateData.firstName,
             last_name: updateData.lastName
         }
-        const response = await axios.post(`http://localhost:6500/api/users/editprofile/${user_id}`, formData)
+        const response = await axios.post(`https://civil-watch.onrender.com/api/users/editprofile/${user_id}`, formData)
         toast("Update Seccessful")
         handleClose()
         setUserData((prevData) => ({
@@ -111,7 +111,7 @@ function UserDashboard({ timeAgo }) {
 
             if (user_id) {
                 try {
-                    const response = await axios.get(`http://localhost:6500/api/users/problem/${user_id}`);
+                    const response = await axios.get(`https://civil-watch.onrender.com/api/users/problem/${user_id}`);
                     setProblemDatas(response.data.problemData);
                     // console.log("Response data: ", response.data.problemData);
                 } catch (error) {
@@ -126,7 +126,7 @@ function UserDashboard({ timeAgo }) {
     }, []);
     const handleDeleteReport = async (itemId) => {
         try {
-            const res = await axios.delete(`http://localhost:6500/api/users/problem/delete/${itemId}`);
+            const res = await axios.delete(`https://civil-watch.onrender.com/api/users/problem/delete/${itemId}`);
             // console.log(res);
 
             setProblemDatas(prevProblemDatas =>
@@ -158,10 +158,10 @@ function UserDashboard({ timeAgo }) {
     const reviewFunction = async (problemId) => {
         // console.log("p Iid : ",problemId)
         try {
-            const repDetail = await axios.get(`http://localhost:6500/api/users/problem/getProblemData/${problemId}`)
+            const repDetail = await axios.get(`https://civil-watch.onrender.com/api/users/problem/getProblemData/${problemId}`)
             const { assignTo_id, _id, user_id } = repDetail.data.data
-            const response = await axios.post('http://localhost:6500/api/users/credit', { assignTo_id, user_id, problemId, creditScore,feedback, isSolved})
-            const updateStatusData = await axios.put(`http://localhost:6500/api/users/problem/updateIsSolved/${problemId}`,{isSolved})
+            const response = await axios.post('https://civil-watch.onrender.com/api/users/credit', { assignTo_id, user_id, problemId, creditScore,feedback, isSolved})
+            const updateStatusData = await axios.put(`https://civil-watch.onrender.com/api/users/problem/updateIsSolved/${problemId}`,{isSolved})
             setProblemDatas((prevProblemDatas) => 
                 prevProblemDatas.map((item) => 
                     item._id === problemId ? { ...item, isSolved: isSolved } : item
