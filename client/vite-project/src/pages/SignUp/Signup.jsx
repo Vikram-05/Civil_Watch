@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+limport React, { useState, useEffect } from 'react'
 import './Signup.css'
 import { MdOutlineMail } from "react-icons/md";
 import { RiLockPasswordLine } from "react-icons/ri";
@@ -88,7 +88,7 @@ function Signup() {
                     </div>
                     <h3>Email</h3>
                     <div className="email_box comm_box">
-                        <input onChange={e => setValues({ ...values, email: e.target.value })} type="text" placeholder='Enter your email' />
+                        <input onChange={e => setValues({ ...values, email: e.target.value })} type="email" placeholder='Enter your email' />
                         <MdOutlineMail className='icon' />
                     </div>
                     <h3>Password</h3>
