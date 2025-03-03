@@ -79,7 +79,7 @@ function ReportCategory() {
                             <FaRoad/>
                             </div>
                             <span>Road</span>
-                            <p>infrastructure problem</p>
+                            <p>infrastructure</p>
                         </div>
                     </SwiperSlide><SwiperSlide>
                         <div className="slide_con">
