@@ -19,7 +19,7 @@ function RepresentativeProfile() {
         const fetchData = async () => {
             try {
                 console.log("Fetching representative data for ID:", id);
-                const response = await axios.get(`http://localhost:6500/api/users/representativeProfile/${id}`);
+                const response = await axios.get(`https://civil-watch.onrender.com/api/users/representativeProfile/${id}`);
                 setRepresentativeData(response.data.data); 
                 console.log("res ",response.data.data)
             } catch (error) {
