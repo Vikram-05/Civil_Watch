@@ -44,7 +44,7 @@ function ReportCategory() {
                     breakpoints={{
                         // When the viewport width is >= 320px
                         320: {
-                          slidesPerView: 1,
+                          slidesPerView: 2,
                         },
                         // When the viewport width is >= 480px
                         480: {
