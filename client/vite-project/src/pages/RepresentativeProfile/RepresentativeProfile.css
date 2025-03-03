@@ -28,7 +28,7 @@
         font-weight: 500;
         margin-top: 10px;
         font-size: 20px;
-
+        text-transform: capitalize;
     }
 
     & .location_area {
