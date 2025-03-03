@@ -48,7 +48,7 @@ function Login() {
         <div className="contaner_Login">
             <form className="inside_box" onSubmit={handleSubmit}>
                 <h2>welcome back</h2>
-                <span>Sign in continue reporting and tracking community issues</span>
+                <span>Sign in to continue reporting and tracking community issues</span>
                 <h3>Email</h3>
                 <div className="email_box comm_box">
                     <input onChange={e => { setValues({ ...values, email: e.target.value }) }} type="email" placeholder='Enter your email' />
