@@ -86,7 +86,7 @@ function ReportIssue() {
 
     try {
         // Send the POST request to the backend
-        const response = await axios.post('http://localhost:6500/api/users/problem/createProblem', formData, {
+        const response = await axios.post('https://civil-watch.onrender.com/api/users/problem/createProblem', formData, {
             headers: {
                 'Authorization': `Bearer ${token}`,
             },
