@@ -79,7 +79,7 @@ function Header() {
 
     const getUserData = async (e) => {
       const userId = localStorage.getItem('user_id')
-      const UserData = await axios.get(`https://civil-watch.onrender.com/api/users/${userId}`)
+      const UserData = await axios.get(`http://localhost:6500/api/users/${userId}`)
       if (UserData.data.role == "representative") {
         setCitizen(false)
       }
@@ -113,7 +113,7 @@ function Header() {
         <div className="left_header">
           <Link to="/"><p className='logo'>CivilWatch</p></Link>
           <Link className='links' to="/"><span><MdOutlineHome className='icon' />Home</span></Link>
-          {isCitizen == true && <Link to="/reportIssue" className='links'><span><LuBadgePlus className='icon' />Report Issue</span></Link>}
+          {(isCitizen == true && isLogin) && <Link to="/reportIssue"  className='links'><span><LuBadgePlus className='icon_drawer' />Report Issue</span></Link>}
           <Link className='links'><span><IoPeopleSharp className='icon ' />Representatives</span></Link>
         </div>
         <div className="right_header">
@@ -132,7 +132,7 @@ function Header() {
                 <Link className='btn_sign' to="/login" ><span className='logout' onClick={handleLogout}>Log out</span></Link>
               </>)
           }
-          {isCitizen == true && <Link to="/reportIssue" className='links' ><button className='report_btn'>Report Issue</button></Link>}
+          {(isCitizen == true && isLogin) && <Link to="/reportIssue" className='links' ><button className='report_btn'>Report Issue</button></Link>}
         <RiMenu2Line className='icon_menu' onClick={toggleDrawer('bottom', true)} />
         </div>
       </div>
