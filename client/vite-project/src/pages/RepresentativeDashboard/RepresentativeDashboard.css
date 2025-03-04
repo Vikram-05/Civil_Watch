@@ -684,4 +684,6 @@
         padding-right: 0  !important;
     }
   }
-  
+  .name_user{
+      
+text-transform: capitalize !important ;}
