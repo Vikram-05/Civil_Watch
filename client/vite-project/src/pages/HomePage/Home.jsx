@@ -11,7 +11,7 @@ function Home() {
         <>
             <div className="home_contaner">
                 <h2>Empower your community</h2>
-                <p className='disc'>report local issues, track solutions, and rate reprsentative preformance</p>
+                <p className='disc'>report local issues, track solutions, and rate representative  performance </p>
                 <Search/>
                 <ReportCategory/>
                 <WorksCategory/>
