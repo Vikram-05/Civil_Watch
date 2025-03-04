@@ -119,6 +119,9 @@
         width: 60% !important;
         margin-left: 20px !important;
     }
+    .search_icon{
+        margin-right: 15px !important;
+    }
 }
 @media (width<412px) {
     .avtar_con{
