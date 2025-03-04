@@ -13,7 +13,7 @@ function Success() {
                     <MdOutlineDoneAll className='icon' />
                 </div>
                 <div className="details_con">
-                    <p>Park cleaneup complete</p>
+                    <p>Park clean up complete</p>
                     <span className='disc'>Resolve by john smith. cridit score +10</span>
                 </div>
             </div>
@@ -31,7 +31,7 @@ function Success() {
                     <MdOutlineDoneAll className='icon' />
                 </div>
                 <div className="details_con">
-                    <p>street cleaneup complete</p>
+                    <p>street clean up complete</p>
                     <span className='disc'>Resolve by john smith. cridit score +13</span>
                 </div>
             </div>
@@ -40,7 +40,7 @@ function Success() {
                     <MdOutlineDoneAll className='icon' />
                 </div>
                 <div className="details_con">
-                    <p>Park cleaneup complete</p>
+                    <p>Park clean up complete</p>
                     <span className='disc'>Resolve by john smith. cridit score +10</span>
                 </div>
             </div>
