@@ -340,7 +340,7 @@ export default function RepresentativeDashboard({ timeAgo }) {
                     {/* <p>{openDetails}</p> */}
                     <div className="details_contaner">
                       <Avatar className='avtar' alt="Remy Sharp" src="https://images.pexels.com/photos/91227/pexels-photo-91227.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" />
-                      <p>{`${detailData.first_name} ${detailData.last_name}`}</p>
+                      <p className="name_user" >{`${detailData.first_name} ${detailData.last_name}`}</p>
                       <span className='email'>{detailData.email}</span>
                       <span className='loc'>{`${detailData.state}, ${detailData.district} ward number ${detailData.wardNumber}`}</span>
                       <h4 className='issue'>Problem Category : </h4>
