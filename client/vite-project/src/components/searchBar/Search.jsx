@@ -79,7 +79,7 @@ function Search() {
                     ))
                 ) : (
 
-                    <p className='msg'>No results found</p>
+                     <p className={searchData.length == 0 ? 'msg none' : 'msg'}>No results found</p>
 
                 )}
             </div>
