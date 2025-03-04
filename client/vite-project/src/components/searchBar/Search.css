@@ -95,6 +95,10 @@
     justify-content: center;
     color: rgb(113, 104, 104);
 }
+.none{
+    display: none !important;
+}
+
 
 @keyframes searchAnimation {
     0%{
