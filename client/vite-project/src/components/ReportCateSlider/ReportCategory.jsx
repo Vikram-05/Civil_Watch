@@ -103,7 +103,7 @@ function ReportCategory() {
                             <IoTrashSharp/>
                             </div>
                             <span>Waste</span>
-                            <p>Santitation issues</p>
+                            <p>Sanitation issues</p>
                         </div>
                     </SwiperSlide><SwiperSlide>
                         <div className="slide_con">
