@@ -9,6 +9,7 @@ import { MdEdit } from "react-icons/md";
 import { MdDone } from "react-icons/md";
 import { AiOutlineLike } from "react-icons/ai";
 import Avatar from '@mui/material/Avatar';
+import CountUp from 'react-countup';
 
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
@@ -293,7 +294,7 @@ export default function RepresentativeDashboard({ timeAgo }) {
           </div>
           <div className="sec_con">
             <FaRegStar className='icon_rep' />
-            <p className="creditScore">{`credit score : ${RepsCredit}`}</p>
+            <p className="creditScore">credit score : <CountUp end={RepsCredit} duration={1.5} delay={1.5}/></p>
             <span><div className="solve_issue">{`Based on ${problemUnderYourArea.filter(item => item.status == "resolved").length} resolved issues`}</div></span>
             <button className='view_his'>View History</button>
           </div>
