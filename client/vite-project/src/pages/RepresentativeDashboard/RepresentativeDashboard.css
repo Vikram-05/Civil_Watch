@@ -524,9 +524,8 @@
     /* display: inline-block !important; */
     margin-left: 20px;
 }
-
-
 .review_main_con{
+    /* border: 2px solid red; */
     max-height: 300px;
     overflow-y: scroll;
     padding:60px 10px 0 10px;
@@ -534,8 +533,9 @@
         width: 5px;
     }
 }
-
-
+.review_con{
+    /* padding-top: 100px; */
+}
 @media (width<980px) {
     .slide_rep_con{
         flex-direction: column !important;
@@ -684,6 +684,4 @@
         padding-right: 0  !important;
     }
   }
-  .name_user{
-      
-text-transform: capitalize !important ;}
+  
