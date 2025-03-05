@@ -60,7 +60,16 @@ function Search() {
                 <IoSearchOutline className="search_icon" />
             </div>
 
-            {loading && <p>Loading...</p>}
+            {loading && <div className='loader_con'><div class="dot-spinner">
+                <div class="dot-spinner__dot"></div>
+                <div class="dot-spinner__dot"></div>
+                <div class="dot-spinner__dot"></div>
+                <div class="dot-spinner__dot"></div>
+                <div class="dot-spinner__dot"></div>
+                <div class="dot-spinner__dot"></div>
+                <div class="dot-spinner__dot"></div>
+                <div class="dot-spinner__dot"></div>
+            </div></div>}
 
             <div className="search-results">
                 {results.length > 0 ? (
