@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import './Count.css'
-import Count from 'react-countup';
+import CountUp from 'react-countup';
 import { MdReportProblem } from "react-icons/md";
 import { MdDoneOutline } from "react-icons/md";
 
