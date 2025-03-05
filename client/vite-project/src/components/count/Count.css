@@ -1,1 +1,99 @@
 
+.counter_con{
+    /* border: 2px solid red; */
+    max-width: 1500px;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 5px;
+    height: 220px;
+
+    & .com_count{
+        /* border: 2px solid #000; */
+        height: 100%;
+        border-radius: 7px;
+        width: 50%;
+        /* padding: 20px 40px; */
+    }
+    & .data_show{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 60%;
+        height: 100%;
+        gap: 10px;
+    }
+}
+
+.first_count,.sec_count{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 10px;
+    min-height: 100%;
+    /* border: 2px solid red; */
+    background-color: #43059b1c;
+
+    & .pro_icon{
+        /* border: 2px solid red; */
+        padding: 8px;
+        font-size: 40px;
+        border-radius: 50%;
+        color: #44059be2;
+        background-color: #43059b24;
+
+    }
+    & .counter_inc{
+        font-size: 25px;
+        font-weight: 600;
+        letter-spacing: 1px;
+        color: #000000b9;
+        
+    }
+    & .total_pro{
+        text-transform: capitalize;
+        font-size: 15px;
+        color: #000000ae;
+        font-weight: 450;
+    }
+}
+.aids{
+    width: 40%;
+    height: 100%;
+    /* border: 2px solid red; */
+    overflow: hidden;
+    border-radius: 7px;
+
+    & img{
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+}
+@media (width<700px) {
+    .counter_con{
+        flex-direction: column;
+        height: auto;
+        /* border: 2px solid red; */
+        & .data_show{
+            width: 100%;
+            /* border: 2px solid red; */
+            height: 160px !important;
+            & .pro_icon{
+                padding: 10px;
+            }
+            & .counter_inc{
+                font-size: 20px;
+            }
+            & .total_pro{
+                font-size: 13px;
+            }
+        }
+        & .aids{
+            width: 100%;
+            height: 180px;
+        }
+    }
+}
