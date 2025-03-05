@@ -102,7 +102,7 @@ function Header() {
 
   function handleLogout() {
     localStorage.removeItem('token')
-    toast('Logout Successful')
+    // toast('Logout Successful')
     setIsLogin(false)
   }
 
