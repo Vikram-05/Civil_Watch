@@ -401,7 +401,7 @@ export default function RepresentativeDashboard({ timeAgo }) {
 
           {
             AllReview.map((item, idx) => (
-              <div key={item._id} className="review_con">
+              <div key={item._id} className="review_cons">
                 <Avatar className='avtar' alt="Remy Sharp" src="https://images.pexels.com/photos/91227/pexels-photo-91227.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" />
                 <div className="avtar_det">
                   <p className="name">{reviewUsers[item.user_id]}</p>
