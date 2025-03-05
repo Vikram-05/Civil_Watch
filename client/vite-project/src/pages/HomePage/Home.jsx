@@ -4,7 +4,7 @@ import ReportCategory from '../../components/ReportCateSlider/ReportCategory';
 import WorksCategory from '../../components/worksCategory/WorksCategory';
 import Success from '../../components/successComponent/Success';
 import Search from '../../components/searchBar/Search';
-import Count from '../../components/count/Count';
+import Counter from '../../components/count/Counter';
 import './Home.css'
 
 function Home() {
@@ -14,7 +14,7 @@ function Home() {
                 <h2>Empower your community</h2>
                 <p className='disc'>report local issues, track solutions, and rate representative  performance </p>
                 <Search/>
-                <Count/>
+                <Counter/>
                 <ReportCategory/>
                 <WorksCategory/>
                 <Success/>
