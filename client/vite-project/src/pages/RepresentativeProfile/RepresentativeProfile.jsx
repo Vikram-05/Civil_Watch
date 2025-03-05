@@ -6,6 +6,7 @@ import { MdFileDownloadDone } from "react-icons/md";
 import { FaRegStar } from "react-icons/fa";
 import { AiOutlineLike } from "react-icons/ai";
 import { HiExclamationTriangle } from "react-icons/hi2";
+import CountUp from 'react-countup';
 
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
@@ -84,7 +85,7 @@ function RepresentativeProfile() {
                 </div>
                 <div className="credit_det_con">
                     <MdOutlineStars className='icon' />
-                    <p className='credit_score'>{`Credit Score : ${creditScore}`}</p>
+                    <p className='credit_score'>Credit Score : <CountUp end={creditScore} duration={1.8} delay={1.5}/></p>
                     <span className="det">Top 10% representative in the region</span>
                     <button className='view_his'>View History</button>
 
