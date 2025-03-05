@@ -292,7 +292,7 @@ h4 {
     gap: 18px;
     margin-bottom: 50px;
 
-    & .review_con {
+    & .review_cons {
         /* border: 2px solid red; */
         width: 100%;
         display: flex;
