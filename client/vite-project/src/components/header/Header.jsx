@@ -10,6 +10,8 @@ import { IoClose } from "react-icons/io5";
 import { IoLogOut } from "react-icons/io5";
 import { RiMenu2Line } from "react-icons/ri";
 import { toast, ToastContainer } from 'react-toastify';
+import { IoLogInSharp } from "react-icons/io5";
+import { BsSignIntersectionFill } from "react-icons/bs";
 import Avatar from '@mui/material/Avatar';
 
 import Box from '@mui/material/Box';
@@ -52,8 +54,8 @@ function Header() {
       {
             !isLogin ?
               (<>
-                <Link to="/Login"><span className='login' >Log In</span></Link>
-                <Link className='btn_sign' to="/signup"><span className='signup'>Sign Up</span></Link>
+                <Link to="/Login"><span className='login' ><IoLogInSharp className='icon_drawer' />Log In</span></Link>
+                <Link className='btn_sign' to="/signup"><span className='signup'><BsSignIntersectionFill className='icon_drawer'/>Sign Up</span></Link>
               </>)
               :
               (<>
