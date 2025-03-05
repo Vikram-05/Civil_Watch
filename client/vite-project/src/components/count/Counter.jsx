@@ -4,7 +4,7 @@ import Count from 'react-countup';
 import { MdReportProblem } from "react-icons/md";
 import { MdDoneOutline } from "react-icons/md";
 
-function Count() {
+function Counter() {
     const [totalProblem, setTotalProblem] = useState(0)
     const getTotalProblem = async () => {
 
@@ -37,4 +37,4 @@ function Count() {
     )
 }
 
-export default Count
+export default Counter
