@@ -279,4 +279,7 @@
     .logo_drawer{
         font-size: 20px !important;
     }
+    .right_header{
+        gap: 15px !important;
+    }
 }
