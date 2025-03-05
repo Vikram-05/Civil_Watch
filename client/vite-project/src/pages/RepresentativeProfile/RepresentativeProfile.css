@@ -293,6 +293,7 @@ h4 {
     /* border: 2px solid rgb(54, 30, 111); */
     gap: 10px;
     padding: 0 !important;
+    margin-bottom: 30px;
     
 
     & .review_cons {
