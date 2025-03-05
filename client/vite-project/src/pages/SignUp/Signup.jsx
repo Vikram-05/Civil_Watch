@@ -51,8 +51,8 @@ function Signup() {
             email: values.email,
             role: values.role,
             location: values.location,
-            state: values.state,
-            district: values.district,
+            state: (values.state).toLowerCase().trim(),
+            district: (values.district).toLowerCase().trim(),
             wardNumber: values.wardNumber
         };
         try {
