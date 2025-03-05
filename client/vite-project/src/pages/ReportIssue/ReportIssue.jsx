@@ -71,14 +71,14 @@ function ReportIssue() {
     }
 
     // Prepare the form data
-    const formData = {
+     const formData = {
         title: values.title,
         description: values.description,
         location: values.location,
         images: values.images,
         severity: values.severity,
-        state: values.state,
-        district: values.district,
+        state: (values.state).toLowerCase().trim(),
+        district: (values.district).toLowerCase().trim(),
         wardNumber: values.wardNumber,
     };
 
