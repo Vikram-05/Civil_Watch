@@ -35,7 +35,7 @@ function Header() {
     right: false,
   });
 
-  const list = (anchor) => (
+ const list = (anchor) => (
     <Box sx={{ maxWidth: '100%', width: 'auto' }}
   
       role="presentation"
@@ -48,6 +48,18 @@ function Header() {
         <Link to="/"><span><MdOutlineHome className='icon_drawer' />Home</span></Link>
         {(isCitizen == true && isLogin) && <Link to="/reportIssue"><span><LuBadgePlus className='icon_drawer' />Report Issue</span></Link>}
       <Link>  <span><IoPeopleSharp className='icon_drawer' />Representatives</span></Link>
+      {
+            !isLogin ?
+              (<>
+                <Link to="/Login"><span className='login' >Log In</span></Link>
+                <Link className='btn_sign' to="/signup"><span className='signup'>Sign Up</span></Link>
+              </>)
+              :
+              (<>
+              
+                <Link className='btn_sign' to="/login" > <IoLogOut className='icon_drawer' /><span className='logout' onClick={handleLogout}>Log out</span></Link>
+              </>)
+          }
       
       <h4>Contact Us : </h4>
       <div className="cont_icon_box">
@@ -120,8 +132,8 @@ function Header() {
           {
             !isLogin ?
               (<>
-                <Link to="/Login"><span className='login' >Log In</span></Link>
-                <Link className='btn_sign' to="/signup"><span className='signup'>Sign Up</span></Link>
+                <Link to="/Login"><span className='login links' >Log In</span></Link>
+                <Link className='btn_sign links' to="/signup "><span className='signup'>Sign Up</span></Link>
               </>)
               :
               (<>
@@ -129,7 +141,7 @@ function Header() {
                   {/* <FaUser className='ico'/> */}
                   <Avatar alt="Remy Sharp" src="https://images.pexels.com/photos/91227/pexels-photo-91227.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" />
                 </Link>
-                <Link className='btn_sign' to="/login" ><span className='logout' onClick={handleLogout}>Log out</span></Link>
+                <Link className='btn_sign links' to="/login" ><span className='logout' onClick={handleLogout}>Log out</span></Link>
               </>)
           }
           {(isCitizen == true && isLogin) && <Link to="/reportIssue" className='links' ><button className='report_btn'>Report Issue</button></Link>}
