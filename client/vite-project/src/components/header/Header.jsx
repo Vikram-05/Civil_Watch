@@ -7,6 +7,7 @@ import { LuBadgePlus } from "react-icons/lu";
 import { IoPeopleSharp } from "react-icons/io5";
 import { FaUser } from "react-icons/fa6";
 import { IoClose } from "react-icons/io5";
+import { IoLogOut } from "react-icons/io5";
 import { RiMenu2Line } from "react-icons/ri";
 import { toast, ToastContainer } from 'react-toastify';
 import Avatar from '@mui/material/Avatar';
