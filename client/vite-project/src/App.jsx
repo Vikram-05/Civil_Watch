@@ -7,6 +7,7 @@ import Login from './pages/LogIn/Login'
 import Signup from './pages/SignUp/Signup'
 import RepresentativeProfile from './pages/RepresentativeProfile/RepresentativeProfile'
 import RepresentativeDashboard from './pages/RepresentativeDashboard/RepresentativeDashboard'
+import Ai from './pages/ai/Ai'
 import './App.css'
 
 function App() {
