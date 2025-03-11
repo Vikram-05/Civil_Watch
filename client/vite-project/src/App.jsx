@@ -42,6 +42,7 @@ function App() {
         <Route path="/RepresentativeDashboard" element={<RepresentativeDashboard timeAgo={timeAgo}/>}/>
         <Route path="/represantativeProfile/:id" element={<RepresentativeProfile/>} />
         <Route path="/reportIssue" element={<ReportIssue/>} />
+        <Route path="/ai" element={<Ai/>} />
       </Routes>
      </BrowserRouter>
     </>
