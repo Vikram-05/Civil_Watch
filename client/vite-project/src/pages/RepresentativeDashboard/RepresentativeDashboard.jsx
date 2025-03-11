@@ -247,6 +247,18 @@ export default function RepresentativeDashboard({ timeAgo }) {
       toast("Error in updating status");
     }
   };
+  if (!representativeDatas) {
+    return <div className='loader_con'><div class="dot-spinner">
+        <div class="dot-spinner__dot"></div>
+        <div class="dot-spinner__dot"></div>
+        <div class="dot-spinner__dot"></div>
+        <div class="dot-spinner__dot"></div>
+        <div class="dot-spinner__dot"></div>
+        <div class="dot-spinner__dot"></div>
+        <div class="dot-spinner__dot"></div>
+        <div class="dot-spinner__dot"></div>
+    </div></div>; // You can show a loading spinner or message
+}
 
 
   
