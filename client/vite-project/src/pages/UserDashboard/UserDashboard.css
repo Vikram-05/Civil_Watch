@@ -514,6 +514,7 @@ input {
     }
     .title_isue{
         font-size: 13px !important;
+        margin-left: 5px;
     }
     .pri{
         font-size: 12px !important;
@@ -544,7 +545,8 @@ input {
         padding-right: 0 !important;
     }
     .title_isue{
-        font-size: 11px !important;
+        
+        
     }
     .pri{
         font-size: 10px !important;
