@@ -27,7 +27,7 @@
 }
 .input_cont{
     width: 100%;
-    height: 40px;
+    height: 45px;
     /* border: 2px solid red; */
     background-color: #eae7e7;
     border-radius: 7px ;
@@ -36,7 +36,7 @@
     align-items: center;
     justify-content: space-between;
     position: absolute;
-    bottom: 20px;
+    bottom: 10px;
     left: 0;
 
     & input{
