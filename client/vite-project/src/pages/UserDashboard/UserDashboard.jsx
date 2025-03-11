@@ -257,7 +257,7 @@ function UserDashboard({ timeAgo }) {
                                     <div key={item._id} className="issue_con" >
                                         <div className="issue_name">
                                             {/* <MdOutlineReportProblem className='logo' /> */}
-                                            <p className='title_isue'>{item.title}</p>
+                                            <p className='title_isue'>{(item.title).split(' ')[0]}</p>
                                         </div>
                                         <span className="priority pri">{`${item.severity}`}</span>
                                         <span className="status pri">{item.status}</span>
@@ -312,7 +312,7 @@ function UserDashboard({ timeAgo }) {
                                     <div key={item._id} className="issue_con">
                                         <div className="issue_name">
                                             <MdOutlineReportProblem className='logo' />
-                                            <p className='title_isue'>{item.title}</p>
+                                            <p className='title_isue'>{(item.title).split(' ')[0]}</p>
                                         </div>
                                         <span className="priority pri">{`${item.severity} `}</span>
                                         <span className="status pri">{item.status}</span>
