@@ -100,7 +100,8 @@ select option:hover {
     }
 
     & .location {
-        width: 3%;
+        width: 20px;
+        margin-right: 10px;
         height: 50%;
         font-size: 15px;
     }
