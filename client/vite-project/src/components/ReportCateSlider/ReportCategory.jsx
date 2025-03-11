@@ -74,61 +74,61 @@ function ReportCategory() {
 
 
                     <SwiperSlide>
-                        <div className="slide_con">
+                        <Link to={ isLogin == true ? "/reportIssue" : '/login'} className="slide_con">
                             <div className="icon_con">
                             <FaRoad/>
                             </div>
                             <span>Road</span>
                             <p>infrastructure</p>
-                        </div>
+                        </Link>
                     </SwiperSlide><SwiperSlide>
-                        <div className="slide_con">
+                        <Link to={ isLogin == true ? "/reportIssue" : '/login'} className="slide_con">
                             <div className="icon_con">
                             <TbSunElectricity/>
                             </div>
                             <span>electricity</span>
                             <p>power outage</p>
-                        </div>
+                        </Link>
                     </SwiperSlide><SwiperSlide>
-                        <div className="slide_con">
+                        <Link to={ isLogin == true ? "/reportIssue" : '/login'} className="slide_con">
                             <div className="icon_con">
                             <FaHandHoldingWater/>
                             </div>
                             <span>water</span>
                             <p>supply issue</p>
-                        </div>
+                        </Link>
                     </SwiperSlide><SwiperSlide>
-                        <div className="slide_con">
+                        <Link to={ isLogin == true ? "/reportIssue" : '/login'} className="slide_con">
                             <div className="icon_con">
                             <IoTrashSharp/>
                             </div>
                             <span>Waste</span>
                             <p>Sanitation issues</p>
-                        </div>
+                        </Link>
                     </SwiperSlide><SwiperSlide>
-                        <div className="slide_con">
+                        <Link to={ isLogin == true ? "/reportIssue" : '/login'} className="slide_con">
                             <div className="icon_con">
                             <IoTrashSharp/>
                             </div>
                             <span>Waste</span>
                             <p>Sanitation issues</p>
-                        </div>
+                        </Link>
                     </SwiperSlide><SwiperSlide>
-                        <div className="slide_con">
+                        <Link to={ isLogin == true ? "/reportIssue" : '/login'} className="slide_con">
                             <div className="icon_con">
                             <IoTrashSharp/>
                             </div>
                             <span>Waste</span>
                             <p>Sanitation issues</p>
-                        </div>
+                        </Link>
                     </SwiperSlide><SwiperSlide>
-                        <div className="slide_con">
+                        <Link to={ isLogin == true ? "/reportIssue" : '/login'} className="slide_con">
                             <div className="icon_con">
                             <IoTrashSharp/>
                             </div>
                             <span>Waste</span>
                             <p>Sanitation issues</p>
-                        </div>
+                        </Link>
                     </SwiperSlide>
 
 
