@@ -333,7 +333,7 @@ export default function RepresentativeDashboard({ timeAgo }) {
                     <div key={item._id} className="issue_con" onClick={() => handleOpenDetails(item._id)}>
                       <div className="issue_name">
                         <MdOutlineReportProblem className='logo' />
-                        <p className='title'>{item.title}</p>
+                        <p className='title'>{(item.title).split(' ')[0]}</p>
                       </div>
                       <span className="priority">{item.severity}</span>
                       <span className="status">{item.status}</span>
@@ -395,7 +395,7 @@ export default function RepresentativeDashboard({ timeAgo }) {
                     <div key={item._id} className="issue_con">
                       <div className="issue_name">
                         <MdDone className='logo' />
-                        <p>{item.title}</p>
+                        <p>{(item.title).split(' ')[0]}</p>
                       </div>
                       <span className="priority">{item.severity}</span>
                       <span className="status">{item.status}</span>
