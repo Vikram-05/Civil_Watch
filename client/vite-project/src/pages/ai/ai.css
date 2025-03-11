@@ -8,6 +8,7 @@
     justify-content:space-between;
     flex-direction: column;
     padding: 0 10px;
+    overflow: hidden;
     /* position: relative; */
 }
 .ai_name_con{
