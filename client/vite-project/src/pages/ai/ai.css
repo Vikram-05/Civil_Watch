@@ -9,7 +9,7 @@
     flex-direction: column;
     padding: 0 10px;
     overflow: hidden;
-    /* position: relative; */
+    position: relative;
 }
 .ai_name_con{
     width: 100%;
@@ -118,5 +118,8 @@
         & img{
             width: 35px;
         }
+    }
+    .ai_main_con{
+        position:static;
     }
 }
