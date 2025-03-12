@@ -19,6 +19,10 @@ const userSchema = mongoose.Schema({
         type: String,
         required: true
       },
+    adharNo: {
+        type: Number,
+        required: false
+      },
       last_name: {
         type: String,
         required: true
