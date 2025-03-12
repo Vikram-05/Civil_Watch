@@ -98,14 +98,15 @@ function Signup() {
                         <input onChange={e => setValues({ ...values, password: e.target.value })} type="password" placeholder='Create a password' />
                         <RiLockPasswordLine className='icon' />
                     </div>
+                    <h3>Enter Adhar</h3>
+                    <div className="adhar comm_box">
+                        <input className='c' onChange={e => setValues({ ...values, adharNo: e.target.value })} type="number" placeholder='xxxx-xxxx-xxxx-xxxx' required/>
+                        <RiLockPasswordLine className='icon' />
+                    </div>
                     {
                         citizen !== true ?
                             <>
-                                <h3>Enter Adhar</h3>
-                                <div className="adhar comm_box">
-                                    <input className='c' onChange={e => setValues({ ...values, adharNo: e.target.value })} type="number" placeholder='xxxx-xxxx-xxxx-xxxx' required/>
-                                    <RiLockPasswordLine className='icon' />
-                                </div>
+                                
                                 <h3>State</h3>
                                 <div className="email_box comm_box">
                                     <input required onChange={e => setValues({ ...values, state: e.target.value })} type="text" placeholder='Enter state' />
