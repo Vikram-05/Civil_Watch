@@ -39,7 +39,8 @@ function Signup() {
         location: "",
         state: "",
         district: "",
-        wardNumber: ""
+        wardNumber: "",
+        adharNo : null
 
     })
     const handleSubmit = async (event) => {
@@ -53,7 +54,8 @@ function Signup() {
             location: values.location,
             state: (values.state).toLowerCase().trim(),
             district: (values.district).toLowerCase().trim(),
-            wardNumber: values.wardNumber
+            wardNumber: values.wardNumber,
+            adharNo: values.adharNo
         };
         try {
             const response = await axios.post('https://civil-watch.onrender.com/api/users/register', formData);
@@ -99,6 +101,11 @@ function Signup() {
                     {
                         citizen !== true ?
                             <>
+                                <h3>Enter Adhar</h3>
+                                <div className="adhar comm_box">
+                                    <input className='c' onChange={e => setValues({ ...values, adharNo: e.target.value })} type="number" placeholder='xxxx-xxxx-xxxx-xxxx' required/>
+                                    <RiLockPasswordLine className='icon' />
+                                </div>
                                 <h3>State</h3>
                                 <div className="email_box comm_box">
                                     <input required onChange={e => setValues({ ...values, state: e.target.value })} type="text" placeholder='Enter state' />
