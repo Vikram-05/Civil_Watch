@@ -95,10 +95,22 @@
 .nextpage_link{
     margin-bottom: 20px;
 }
-
 .adhar{
     display: flex;
     align-items: center;
     justify-content: center;
     /* border: 2px solid red; */
+    & input{
+        margin-top: 15px;
+    }
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
 }
