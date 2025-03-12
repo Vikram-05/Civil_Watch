@@ -3,11 +3,13 @@ import bcrypt from 'bcryptjs'
 import jwt from 'jsonwebtoken'
 
 export const registerUser = async (req, res) => {
-    const { email, password, first_name, last_name, role, location,state,district,wardNumber } = req.body;
+    const { email, password, first_name, last_name, role, location,state,district,wardNumber,adharNo } = req.body;
 
     try {
         const userExists = await User.findOne({ email })
         if (userExists) return res.status(400).json({ message: 'user already exist' })
+        const userExistsByAdhar = await User.findOne({ adharNo })
+        if (userExistsByAdhar) return res.status(400).json({ message: 'user already exist' })
 
         const hashedPassword = await bcrypt.hash(password, 10);
 
@@ -20,7 +22,8 @@ export const registerUser = async (req, res) => {
             location,
             state,
             district,
-            wardNumber
+            wardNumber,
+            adharNo
         })
         await user.save();
         const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, { expiresIn: '30d' });
@@ -38,6 +41,7 @@ export const registerUser = async (req, res) => {
         res.status(500).json({ message: error.message });
     }
 }
+
 
 
 export const loginUser = async (req, res) => {
