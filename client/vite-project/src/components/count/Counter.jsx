@@ -3,6 +3,7 @@ import './Count.css'
 import CountUp from 'react-countup';
 import { MdReportProblem } from "react-icons/md";
 import { MdDoneOutline } from "react-icons/md";
+import vid from '../../../public/loop.mp4'
 
 function Counter() {
     const [totalProblem, setTotalProblem] = useState(0)
@@ -30,7 +31,7 @@ function Counter() {
                     </div>
                 </div>
                 <div className="aids ">
-                    <img src="https://images.pexels.com/photos/7345444/pexels-photo-7345444.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="" />
+                    <video src={vid} autoPlay loop muted controls={false} />
                 </div>
             </div>
         </>
