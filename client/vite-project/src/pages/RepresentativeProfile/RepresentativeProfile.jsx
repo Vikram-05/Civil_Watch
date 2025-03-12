@@ -94,7 +94,7 @@ function RepresentativeProfile() {
                 </div>
                 <div className="credit_det_con">
                     <MdOutlineStars className='icon' />
-                    <p className='credit_score'>Credit Score : <CountUp end={creditScore} duration={1.8} delay={1.5}/></p>
+                    <p className='credit_score'>Public Trust Score : <CountUp end={creditScore} duration={1.8} delay={1.5}/></p>
                     <span className="det">Top 10% representative in the region</span>
                     <button className='view_his'>View History</button>
 
