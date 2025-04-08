@@ -29,7 +29,7 @@
     width: 100%;
     height: 45px;
     /* border: 2px solid red; */
-    background-color: #eae7e7;
+    background-color: #e1dddd6b;
     border-radius: 7px ;
     overflow: hidden;
     display: flex;
@@ -43,7 +43,7 @@
         width: 95%;
         padding: 10px 20px;
         font-weight: 450;
-        color: #000000de;
+        color: #070707e1;
         background-color: transparent;
         border: none;
         outline: none;
@@ -55,7 +55,8 @@
         margin: auto;
         width: 18px;
         cursor: pointer;  
-        margin-right: 10px;  
+        margin-right: 15px;  
+        color: #5300c0;
     }
 }
 .data_con{
@@ -89,6 +90,7 @@
         /* background-color: rgba(121, 114, 220, 0.506); */
     }
     & .eva{
+      width: 100%;
         border-radius: 7px;
         display: block;
         /* border: 2px solid red; */
@@ -110,23 +112,46 @@
         }
     }
 }
-/* Add these styles to your ai.css */
-.answer_points {
-    list-style: none; /* Remove default bullet points */
-    padding: 0;
+.ai_logo_a{
+    height: 400px;
+    opacity: 0.8;
+    width: 100%;
+    object-fit: contain;
+}
+.eva .asd {
+  /* border: 4px solid red; */
+    text-align: left;
+    line-height: 1.6;
+    text-wrap: wrap;
+    word-wrap: inherit;
+    overflow-x: hidden;
+}
+
+.eva strong {
+    color: #4870ac;
+    font-weight: bold;
+    display: block;
+    margin-top: 10px;
+    margin-bottom: 5px;
+    font-size: 18px;
+    margin: 15px 0;
+}
+
+.eva br {
+    display: block;
+    content: "";
     margin: 5px 0;
 }
 
-.answer_points li {
-    display: flex; /* Align icon and text */
-    align-items: center; /* Vertically align items */
-    margin-bottom: 5px;
+/* Add some animation for loading */
+@keyframes pulse {
+    0% { opacity: 0.6; }
+    50% { opacity: 1; }
+    100% { opacity: 0.6; }
 }
 
-.point_icon {
-    margin-right: 8px;
-    font-size: 1.2em; /* Adjust icon size */
-    color: #007bff; /* Example color */
+.eva span[data-loading="true"] {
+    animation: pulse 1.5s infinite;
 }
 @media (width<800px) {
     .eva{
@@ -140,4 +165,78 @@
     .ai_main_con{
         position:static;
     }
+    .eva strong {
+        /* color: #a54a4a; */
+        font-size: 15px;
+    }
+    .ai_logo_a{
+        height: 300px;
+    }
+}
+.loadership_JPIRJ {
+  display: flex;
+  position: relative;
+  width: 44px;
+  height: 24px;
+}
+
+.loadership_JPIRJ div {
+  position: absolute;
+  width: 4px;
+  height: 8px;
+  background: #5300c0;
+  top: 8px;
+  animation:
+    loadership_JPIRJ_scale 1.8s infinite,
+    loadership_JPIRJ_fade 1.8s infinite;
+  animation-timing-function: ease-in-out;
+}
+
+.loadership_JPIRJ div:nth-child(1) {
+  animation-delay: 0s;
+  left: 0px;
+}
+.loadership_JPIRJ div:nth-child(2) {
+  animation-delay: 0.16s;
+  left: 10px;
+}
+.loadership_JPIRJ div:nth-child(3) {
+  animation-delay: 0.32s;
+  left: 20px;
+}
+.loadership_JPIRJ div:nth-child(4) {
+  animation-delay: 0.48s;
+  left: 30px;
+}
+.loadership_JPIRJ div:nth-child(5) {
+  animation-delay: 0.64s;
+  left: 40px;
+}
+
+@keyframes loadership_JPIRJ_scale {
+  0%,
+  44.44444444444445%,
+  100% {
+    transform: scaleY(1);
+  }
+  22.222222222222225% {
+    transform: scaleY(3);
+  }
+}
+
+@keyframes loadership_JPIRJ_fade {
+  0%,
+  44.44444444444445%,
+  100% {
+    opacity: 1;
+  }
+  22.222222222222225% {
+    opacity: 1;
+  }
+}
+
+.asd{
+  width: 90% !important;
+  /* border: 5px solid red; */
+
 }
