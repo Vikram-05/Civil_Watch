@@ -37,31 +37,44 @@ function ReportIssue() {
     };
 
     // Function to handle the use of current location
-    const useCurrentLocation = async () => {
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition((position) => {
-                const location = `${position.coords.latitude}, ${position.coords.longitude}`;
+    const useCurrentLocation = () => {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(async (position) => {
+            const location = `${position.coords.latitude}, ${position.coords.longitude}`;
+
+            setValues(prevValues => ({
+                ...prevValues,
+                location: location
+            }));
+
+            try {
+                const res = await axios(`${import.meta.env.VITE_BASE_URL}/map/getlocation`, {
+                    params: { location }
+                });
+
+                const { state, distric, pincode } = res.data.data;
+
                 setValues(prevValues => ({
                     ...prevValues,
-                    location: location
+                    state: state,
+                    district: distric,
+                    wardNumber: pincode
                 }));
-            }, (error) => {
-                alert("Unable to retrieve location");
-            });
-        } else {
-            alert("Geolocation is not supported by this browser.");
-        }
-        const res = await axios(`${import.meta.env.VITE_BASE_URL}/map/getlocation`, { location: location })
-        const { state, distric, pincode } = res.data.data;
-        setValues(prevValues => ({
-            ...prevValues,
-            state: state,
-            district: distric,
-            wardNumber: pincode
 
-        }));
-        console.log("response data : ", state, distric, pincode)
-    };
+                console.log("response data : ", state, distric, pincode);
+            } catch (error) {
+                console.error("Error fetching location data:", error);
+            }
+        }, (error) => {
+            alert("Unable to retrieve location");
+            console.error(error);
+        });
+    } else {
+        alert("Geolocation is not supported by this browser.");
+    }
+};
+    
+    
 
     const handleCategoryChange = (e) => {
         const selectCategory = e.target.value;
