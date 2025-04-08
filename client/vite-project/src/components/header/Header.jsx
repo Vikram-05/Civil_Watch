@@ -94,7 +94,7 @@ function Header() {
 
     const getUserData = async (e) => {
       const userId = localStorage.getItem('user_id')
-      const UserData = await axios.get(`https://civil-watch.onrender.com/api/users/${userId}`)
+      const UserData = await axios.get(`${import.meta.env.VITE_BASE_URL}/${userId}`)
       if (UserData.data.role == "representative") {
         setCitizen(false)
       }
