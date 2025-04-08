@@ -48,9 +48,8 @@ function ReportIssue() {
             }));
 
             try {
-                const res = await axios(`${import.meta.env.VITE_BASE_URL}/map/getlocation`, {
-                    params: { location }
-                });
+                const res = await axios(`${import.meta.env.VITE_BASE_URL}/map/getlocation`, { location }
+                );
 
                 const { state, distric, pincode } = res.data.data;
 
