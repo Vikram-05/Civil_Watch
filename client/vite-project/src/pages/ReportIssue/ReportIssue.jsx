@@ -5,13 +5,14 @@ import { IoLocationSharp } from "react-icons/io5";
 import { ToastContainer, toast } from 'react-toastify';
 
 function ReportIssue() {
+    const [submitLoader,setSubmitLoader] = useState(false)
     const [values, setValues] = useState({
         title: "",
         description: "",
         location: "",
-        state : "",
-        district : "",
-        wardNumber :"",
+        state: "",
+        district: "",
+        wardNumber: "",
         images: [],
         severity: "low",
         status: "pending",
@@ -36,7 +37,7 @@ function ReportIssue() {
     };
 
     // Function to handle the use of current location
-    const useCurrentLocation = () => {
+    const useCurrentLocation = async () => {
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition((position) => {
                 const location = `${position.coords.latitude}, ${position.coords.longitude}`;
@@ -50,6 +51,16 @@ function ReportIssue() {
         } else {
             alert("Geolocation is not supported by this browser.");
         }
+        const res = await axios(`${import.meta.env.VITE_BASE_URL}/map/getlocation`, { location: location })
+        const { state, distric, pincode } = res.data.data;
+        setValues(prevValues => ({
+            ...prevValues,
+            state: state,
+            district: distric,
+            wardNumber: pincode
+
+        }));
+        console.log("response data : ", state, distric, pincode)
     };
 
     const handleCategoryChange = (e) => {
@@ -62,56 +73,59 @@ function ReportIssue() {
     }
 
     const handleSubmit = async (e) => {
-    e.preventDefault();
+        e.preventDefault();
+        setSubmitLoader(true)
 
-    // Check if title, state, district, wardNumber are filled
-    if (!values.title || !values.state || !values.district || !values.wardNumber) {
-        toast.error("Please fill in all required fields.");
-        return;  // Prevent submission if any field is missing
-    }
+        // Check if title, state, district, wardNumber are filled
+        if (!values.title || !values.state || !values.district || !values.wardNumber) {
+            toast.error("Please fill in all required fields.");
+            return;  // Prevent submission if any field is missing
+        }
 
-    // Prepare the form data
-     const formData = {
-        title: values.title,
-        description: values.description,
-        location: values.location,
-        images: values.images,
-        severity: values.severity,
-        state: (values.state).toLowerCase().trim(),
-        district: (values.district).toLowerCase().trim(),
-        wardNumber: values.wardNumber,
+        // Prepare the form data
+        const formData = {
+            title: values.title,
+            description: values.description,
+            location: values.location,
+            images: values.images,
+            severity: values.severity,
+            state: (values.state).toLowerCase().trim(),
+            district: (values.district).toLowerCase().trim(),
+            wardNumber: values.wardNumber,
+        };
+
+        const token = localStorage.getItem('token');
+
+        try {
+            // Send the POST request to the backend
+            const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/problem/createProblem`, formData, {
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                },
+            });
+
+            // Reset form values after successful submission
+            setValues({
+                title: "",
+                description: "",
+                location: "",
+                images: [],
+                severity: "low",
+                status: "pending",
+                state: "",
+                district: "",
+                wardNumber: "",
+            });
+
+            // Show success message
+            toast.success(response.data.message);
+            setSubmitLoader(false)
+        } catch (error) {
+            setSubmitLoader(false)
+            console.error('Error during submission:', error.response?.data || error.message);
+            toast.error("Data not submitted. Please try again.");
+        }
     };
-
-    const token = localStorage.getItem('token');
-
-    try {
-        // Send the POST request to the backend
-        const response = await axios.post('https://civil-watch.onrender.com/api/users/problem/createProblem', formData, {
-            headers: {
-                'Authorization': `Bearer ${token}`,
-            },
-        });
-
-        // Reset form values after successful submission
-        setValues({
-            title: "",
-            description: "",
-            location: "",
-            images: [],
-            severity: "low",
-            status: "pending",
-            state: "",
-            district: "",
-            wardNumber: "",
-        });
-
-        // Show success message
-        toast.success(response.data.message);
-    } catch (error) {
-        console.error('Error during submission:', error.response?.data || error.message);
-        toast.error("Data not submitted. Please try again.");
-    }
-};
 
 
     return (
@@ -139,18 +153,18 @@ function ReportIssue() {
                 <div className="loc_info">
                     <div className="det_box1">
                         <span className='state'>State</span>
-                        <input value={values.state} type="text" name="" id="" placeholder='Enter State' onChange={e => setValues({ ...values, state: e.target.value })}/>
+                        <input value={values.state} type="text" name="" id="" placeholder='Enter State' onChange={e => setValues({ ...values, state: e.target.value })} />
 
                     </div>
                     <div className="det_box2">
                         <span className='district'>District</span>
-                        <input value={values.district} type="text" name="" id="" placeholder='Enter District' onChange={e => setValues({ ...values, district: e.target.value })}/>
+                        <input value={values.district} type="text" name="" id="" placeholder='Enter District' onChange={e => setValues({ ...values, district: e.target.value })} />
 
                     </div>
                     <div className="det_box3">
 
-                        <span className='wardNo'>Ward No.</span>
-                        <input value={values.wardNumber} type="text" name="" id="" placeholder='Enter Ward Number' onChange={e => setValues({ ...values, wardNumber: e.target.value })}/>
+                        <span className='wardNo'>Pincode</span>
+                        <input value={values.wardNumber} type="text" name="" id="" placeholder='Enter Ward Number' onChange={e => setValues({ ...values, wardNumber: e.target.value })} />
                     </div>
                 </div>
                 <div className="location_box">
@@ -186,7 +200,7 @@ function ReportIssue() {
                     <span>Preview</span>
                     <p>Review your report before submission</p>
                     <div className="btn_con">
-                        <button type="submit" className='submit'>Submit Report</button>
+                        <button type="submit" className='submit'>{submitLoader ? <div class="lds-dual-ring"></div> : "Submit Report"}</button>
                         <button type="button" className='edit'>Edit Report</button>
                     </div>
                 </div>
