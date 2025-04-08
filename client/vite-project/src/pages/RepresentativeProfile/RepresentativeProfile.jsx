@@ -23,10 +23,10 @@ function RepresentativeProfile() {
         const fetchData = async () => {
             try {
                 console.log("Fetching representative data for ID:", id);
-                const response = await axios.get(`https://civil-watch.onrender.com/api/users/representativeProfile/${id}`);
+                const response = await axios.get(`${import.meta.env.VITE_BASE_URL}/representativeProfile/${id}`);
                 setRepresentativeData(response.data.data);
                 let total = 0;
-                const res = await axios.get(`https://civil-watch.onrender.com/api/users/credit/getSimilarRep/${id}`)
+                const res = await axios.get(`${import.meta.env.VITE_BASE_URL}/credit/getSimilarRep/${id}`)
                 for (let score of res.data.AllRepresentative) {
                     total += score.credit_score;
                 }
@@ -36,7 +36,7 @@ function RepresentativeProfile() {
 
                 // Create a list of promises to fetch user data for each review
                 const userNamesPromises = res.data.AllRepresentative.map(async (review) => {
-                    const userRes = await axios.get(`https://civil-watch.onrender.com/api/users/${review.user_id}`);
+                    const userRes = await axios.get(`${import.meta.env.VITE_BASE_URL}/${review.user_id}`);
                     return { userId: review.user_id, name: `${userRes.data.first_name} ${userRes.data.last_name}` };
                 });
 
