@@ -150,6 +150,17 @@ function ReportIssue() {
 
 
                 <span className="location_title">Location</span>
+                <button type="button" className='current_loc' onClick={useCurrentLocation}>Use Current Location</button>
+                <div className="location_box">
+                    <input
+                        onChange={e => setValues({ ...values, location: e.target.value })}
+                        type="text"
+                        value={values.location}
+                        placeholder='Enter location'
+                    />
+                    <IoLocationSharp className='location' />
+                </div>
+                
                 <div className="loc_info">
                     <div className="det_box1">
                         <span className='state'>State</span>
@@ -167,17 +178,7 @@ function ReportIssue() {
                         <input value={values.wardNumber} type="text" name="" id="" placeholder='Enter Ward Number' onChange={e => setValues({ ...values, wardNumber: e.target.value })} />
                     </div>
                 </div>
-                <div className="location_box">
-                    <input
-                        onChange={e => setValues({ ...values, location: e.target.value })}
-                        type="text"
-                        value={values.location}
-                        placeholder='Enter location'
-                    />
-                    <IoLocationSharp className='location' />
-                </div>
-                <button type="button" className='current_loc' onClick={useCurrentLocation}>Use Current Location</button>
-
+                
                 <div className="level_con">
                     <span className="level">Severity Level</span>
                     <button type="button" onClick={() => handleSeverityClick("low")} className={values.severity === "low" ? "active_Severity" : ""}>Low</button>
