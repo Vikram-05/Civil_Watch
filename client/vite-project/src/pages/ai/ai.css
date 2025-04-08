@@ -110,6 +110,24 @@
         }
     }
 }
+/* Add these styles to your ai.css */
+.answer_points {
+    list-style: none; /* Remove default bullet points */
+    padding: 0;
+    margin: 5px 0;
+}
+
+.answer_points li {
+    display: flex; /* Align icon and text */
+    align-items: center; /* Vertically align items */
+    margin-bottom: 5px;
+}
+
+.point_icon {
+    margin-right: 8px;
+    font-size: 1.2em; /* Adjust icon size */
+    color: #007bff; /* Example color */
+}
 @media (width<800px) {
     .eva{
         font-size: 13px !important;
