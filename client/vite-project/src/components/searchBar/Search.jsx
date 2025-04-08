@@ -21,7 +21,7 @@ function Search() {
 
             setLoading(true); // Set loading to true
             try {
-                const response = await axios.get('https://civil-watch.onrender.com/api/users', {
+                const response = await axios.get(`${import.meta.env.VITE_BASE_URL}`, {
                     params: {
                         first_name: searchData,
                         last_name: searchData,
