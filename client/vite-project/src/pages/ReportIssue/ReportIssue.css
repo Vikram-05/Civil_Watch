@@ -44,38 +44,36 @@ option {
     }
 }
 select option:hover {
-    background-color: red;
     color: white; /* Optional: Changes text color when hovering */
-  }
+}
 
 .dec_box {
     display: flex;
     align-items: start;
     justify-content: center;
     flex-direction: column;
-
-
+    
+    
     & span {
         margin-top: 10px;
         width: 100%;
-
+        
     }
-
-
-        &::placeholder {
-            height: 100%;
-            font-weight: 500;
-            font-size: 14px;
-        }
+    
+    
+    &::placeholder {
+        height: 100%;
+        font-weight: 500;
+        font-size: 14px;
+    }
 }
 
 .location_title {
     display: inline-block;
-    /* margin-top: 20px; */
+    margin-right: 20px;
 }
 
 .location_box {
-    margin-top: 10px; 
     display: flex;
     align-items: center;
     justify-content: center;
@@ -85,7 +83,9 @@ select option:hover {
     border-radius: 5px;
     overflow: hidden;
     background-color: #c2c0c037;
-
+    margin-top: 10px;
+    
+    
     & input {
         width: 97%;
         height: 100%;
@@ -93,6 +93,7 @@ select option:hover {
         border: none;
         outline: none;
         background-color: transparent;
+        
 
         &::placeholder {
             font-weight: 500;
@@ -110,7 +111,6 @@ select option:hover {
 
 .current_loc {
     margin-top: 10px;
-    margin-left: 10px;
     padding: 5px 20px;
     border: none;
     outline: none;
@@ -263,10 +263,9 @@ select option:hover {
     & .image_preview{
         /* border: 2px solid red; */
         margin-top: 10px;
-        height: 200px;
+        height: 150px;
         width: 100%;
         aspect-ratio: 1;
-        padding: 5px  5px 5px 0;
         display: flex;
         align-items: start;
         justify-content: start;
@@ -284,10 +283,42 @@ select option:hover {
         & img{
             border-radius: 10px;
             overflow: hidden;
-            min-width:  180px;
+            width: 100%;
             height: 100%;
-            object-fit: cover;
-            border: 1px solid #00000044;
+            object-fit: contain;
+            /* border: 1px solid #00000044; */
+        }
+        & .image_container{
+            border: 1px solid #6a6a6a;
+            border-radius: 5px;
+            min-width:  180px;
+            max-width: 180px;
+            height: 100%;
+            overflow: hidden;
+            position: relative ;
+        }
+        & .remove_image{
+            /* border: 5px solid red; */
+            position: absolute;
+            top: 0;
+            right: 0;
+            z-index: 88;
+            width: 30px;
+            height: 30px;
+            background-color: #a262ecda;
+            border: none;
+            border-radius: 10px;
+            font-size: 25px;
+            font-weight: 400;
+            cursor: pointer;
+            color: #2b0062;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all ease 0.25s;
+            &:hover{
+                background-color: #6c3dd2;
+            }
         }
     }
 }
@@ -328,6 +359,7 @@ select option:hover {
         border: none;
         outline: none;
         background-color: #c2c0c037;
+        
     }
 }
 input[type=file]::file-selector-button {
