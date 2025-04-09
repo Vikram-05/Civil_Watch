@@ -84,7 +84,7 @@ export default function RepresentativeDashboard({ timeAgo }) {
   })
   const [problemUnderYourArea, setProblemUnderYourArea] = useState([]);
   const [AllReview, setAllReview] = useState([])
-  const [reviewUsers, setReviewUsers] = useState({}); 
+  const [reviewUsers, setReviewUsers] = useState({});
 
   useEffect(() => {
     const userId = localStorage.getItem('user_id')
@@ -137,39 +137,39 @@ export default function RepresentativeDashboard({ timeAgo }) {
     }
     AllRep()
 
-    
+
 
     const handleAllReviews = async () => {
-    const user_id = localStorage.getItem('user_id')
-    try {
-      const res = await axios.get(`${import.meta.env.VITE_BASE_URL}/credit/getSimilarRep/${user_id}`);
-      setAllReview(res.data.AllRepresentative);
+      const user_id = localStorage.getItem('user_id')
+      try {
+        const res = await axios.get(`${import.meta.env.VITE_BASE_URL}/credit/getSimilarRep/${user_id}`);
+        setAllReview(res.data.AllRepresentative);
 
-      // Create a list of promises to fetch user data for each review
-      const userNamesPromises = res.data.AllRepresentative.map(async (review) => {
-        const userRes = await axios.get(`${import.meta.env.VITE_BASE_URL}/${review.user_id}`);
-        return { userId: review.user_id, name: `${userRes.data.first_name} ${userRes.data.last_name}` };
-      });
+        // Create a list of promises to fetch user data for each review
+        const userNamesPromises = res.data.AllRepresentative.map(async (review) => {
+          const userRes = await axios.get(`${import.meta.env.VITE_BASE_URL}/${review.user_id}`);
+          return { userId: review.user_id, name: `${userRes.data.first_name} ${userRes.data.last_name}` };
+        });
 
-      // Wait for all the user data to be fetched
-      const userNamesData = await Promise.all(userNamesPromises);
+        // Wait for all the user data to be fetched
+        const userNamesData = await Promise.all(userNamesPromises);
 
-      // Create a user lookup object
-      const userNames = userNamesData.reduce((acc, { userId, name }) => {
-        acc[userId] = name;
-        return acc;
-      }, {});
+        // Create a user lookup object
+        const userNames = userNamesData.reduce((acc, { userId, name }) => {
+          acc[userId] = name;
+          return acc;
+        }, {});
 
-      setReviewUsers(userNames);
+        setReviewUsers(userNames);
 
-    } catch (error) {
-      console.log("Error in fetching reviews: ", error);
-    }
-  };
+      } catch (error) {
+        console.log("Error in fetching reviews: ", error);
+      }
+    };
 
-  handleAllReviews();
-    
-    
+    handleAllReviews();
+
+
   }, [])
 
 
@@ -215,7 +215,7 @@ export default function RepresentativeDashboard({ timeAgo }) {
       email: email
     })
 
-    // console.log("pro data user: ", UserData.data)
+    console.log("pro data user: ", detailData)
   };
 
   // Function to close the modal
@@ -249,19 +249,19 @@ export default function RepresentativeDashboard({ timeAgo }) {
   };
   if (!representativeDatas) {
     return <div className='loader_con'><div class="dot-spinner">
-        <div class="dot-spinner__dot"></div>
-        <div class="dot-spinner__dot"></div>
-        <div class="dot-spinner__dot"></div>
-        <div class="dot-spinner__dot"></div>
-        <div class="dot-spinner__dot"></div>
-        <div class="dot-spinner__dot"></div>
-        <div class="dot-spinner__dot"></div>
-        <div class="dot-spinner__dot"></div>
+      <div class="dot-spinner__dot"></div>
+      <div class="dot-spinner__dot"></div>
+      <div class="dot-spinner__dot"></div>
+      <div class="dot-spinner__dot"></div>
+      <div class="dot-spinner__dot"></div>
+      <div class="dot-spinner__dot"></div>
+      <div class="dot-spinner__dot"></div>
+      <div class="dot-spinner__dot"></div>
     </div></div>; // You can show a loading spinner or message
-}
+  }
 
 
-  
+
 
 
 
@@ -306,7 +306,7 @@ export default function RepresentativeDashboard({ timeAgo }) {
           </div>
           <div className="sec_con">
             <FaRegStar className='icon_rep' />
-            <p className="creditScore">Public Trust Score : <CountUp end={RepsCredit} duration={1.5} delay={1.5}/></p>
+            <p className="creditScore">Public Trust Score : <CountUp end={RepsCredit} duration={1.5} delay={1.5} /></p>
             <span><div className="solve_issue">{`Based on ${problemUnderYourArea.filter(item => item.status == "resolved").length} resolved issues`}</div></span>
             <button className='view_his'>View History</button>
           </div>
@@ -363,12 +363,10 @@ export default function RepresentativeDashboard({ timeAgo }) {
                       <span>{detailData.severity}</span>
                       <h4 >Discription : </h4>
                       <span className='disc'>{detailData.description}</span>
-
                       <div className="all_img">
-                        <img src="https://tse3.mm.bing.net/th?id=OIP.a_NBaDZCwiV6fKa7XJ6B9AHaEK&pid=Api&P=0&h=180" alt="" />
-                        <img src="https://tse3.mm.bing.net/th?id=OIP.a_NBaDZCwiV6fKa7XJ6B9AHaEK&pid=Api&P=0&h=180" alt="" />
-                        <img src="https://tse3.mm.bing.net/th?id=OIP.a_NBaDZCwiV6fKa7XJ6B9AHaEK&pid=Api&P=0&h=180" alt="" />
-                        <img src="https://tse3.mm.bing.net/th?id=OIP.a_NBaDZCwiV6fKa7XJ6B9AHaEK&pid=Api&P=0&h=180" alt="" />
+                        {detailData.images.map((img, idx) => (
+                          <img key={idx} src={img} alt={`Issue image ${idx + 1}`} />
+                        ))}
                       </div>
                       <h4 className='issue'>Current Status : </h4>
                       <span>{detailData.status}</span>
@@ -419,7 +417,7 @@ export default function RepresentativeDashboard({ timeAgo }) {
                 <div className="avtar_det">
                   <p className="name">{reviewUsers[item.user_id]}</p>
                   <span className="message">{(item.feedback).split(' ').length > 10 ? item.feedback.split(' ').slice(0, 6).join(' ') + "..." : item.feedback}<span className="credit_score">{`|  credit Score :  +${item.credit_score}`}</span></span>
-                  
+
                 </div>
                 <AiOutlineLike className='like' />
               </div>
