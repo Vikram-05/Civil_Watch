@@ -304,10 +304,12 @@
 
 .details_contaner {
     overflow: hidden;
+    text-transform: capitalize;
 
     & p {
         margin-top: 10px;
         font-weight: 500;
+        text-transform: capitalize;
     }
 
     & .email {
@@ -371,7 +373,7 @@
             width: 130px;
             object-fit: cover;
             border-radius: 7px;
-
+            border: 1px solid #767676;
             height: 100%;
             aspect-ratio: 1;
         }
