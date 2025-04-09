@@ -5,7 +5,7 @@ import { IoLocationSharp } from "react-icons/io5";
 import { ToastContainer, toast } from 'react-toastify';
 
 function ReportIssue() {
-    const [submitLoader,setSubmitLoader] = useState(false)
+    const [submitLoader, setSubmitLoader] = useState(false)
     const [values, setValues] = useState({
         title: "",
         description: "",
@@ -36,44 +36,46 @@ function ReportIssue() {
         }));
     };
 
-    // Function to handle the use of current location
     const useCurrentLocation = () => {
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(async (position) => {
-            const location = `${position.coords.latitude}, ${position.coords.longitude}`;
-
-            setValues(prevValues => ({
-                ...prevValues,
-                location: location
-            }));
-
-            try {
-                const res = await axios.get(`${import.meta.env.VITE_BASE_URL}/map/getlocation`, { location:location }
-                );
-
-                const { state, distric, pincode } = res.data.data;
-
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(async (position) => {
+                const location = `${position.coords.latitude}, ${position.coords.longitude}`;
+    
+                // Set the location in state
                 setValues(prevValues => ({
                     ...prevValues,
-                    state: state,
-                    district: distric,
-                    wardNumber: pincode
+                    location: location
                 }));
+    
+                try {
+                    const res = await axios.get(`${import.meta.env.VITE_BASE_URL}/map/getlocation`, {
+                        params: { location: location } 
+                    });
+                    console.log("res : ",res)
+    
+                    const { state, distric, pincode } = res.data.data;
+    
+                    setValues(prevValues => ({
+                        ...prevValues,
+                        state: state,
+                        district: distric,
+                        wardNumber: pincode
+                    }));
+    
+                    // console.log("Response data:", state, distric, pincode);
+                } catch (error) {
+                    console.error("Error fetching location data:", error);
+                }
+            }, (error) => {
+                alert("Unable to retrieve location");
+                console.error(error);
+            });
+        } else {
+            alert("Geolocation is not supported by this browser.");
+        }
+    };
+    
 
-                console.log("response data : ", state, distric, pincode);
-            } catch (error) {
-                console.error("Error fetching location data:", error);
-            }
-        }, (error) => {
-            alert("Unable to retrieve location");
-            console.error(error);
-        });
-    } else {
-        alert("Geolocation is not supported by this browser.");
-    }
-};
-    
-    
 
     const handleCategoryChange = (e) => {
         const selectCategory = e.target.value;
@@ -172,7 +174,7 @@ function ReportIssue() {
                     />
                     <IoLocationSharp className='location' />
                 </div>
-                
+
                 <div className="loc_info">
                     <div className="det_box1">
                         <span className='state'>State</span>
@@ -190,7 +192,7 @@ function ReportIssue() {
                         <input value={values.wardNumber} type="text" name="" id="" placeholder='Enter Ward Number' onChange={e => setValues({ ...values, wardNumber: e.target.value })} />
                     </div>
                 </div>
-                
+
                 <div className="level_con">
                     <span className="level">Severity Level</span>
                     <button type="button" onClick={() => handleSeverityClick("low")} className={values.severity === "low" ? "active_Severity" : ""}>Low</button>
