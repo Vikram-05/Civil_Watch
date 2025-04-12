@@ -10,13 +10,25 @@ import { MdDone } from "react-icons/md";
 import { AiOutlineLike } from "react-icons/ai";
 import Avatar from '@mui/material/Avatar';
 import CountUp from 'react-countup';
+import Chart from '../../components/chart/Chart';
 
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import { IoClose } from "react-icons/io5";
 import { toast, ToastContainer } from 'react-toastify';
+import { FaUserPen } from "react-icons/fa6";
+import batch from '../../../public/batch1.png'
 
 import axios from 'axios';
+import {
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  ResponsiveContainer,
+} from "recharts";
 
 const style = {
   position: 'absolute',
@@ -111,7 +123,6 @@ export default function RepresentativeDashboard({ timeAgo }) {
       try {
         const response = await axios.get(`${import.meta.env.VITE_BASE_URL}/problem/problemUnderRep/${userId}`)
         setProblemUnderYourArea(response.data.AllProblemData)
-        // console.log("problem Data : ", response.data.AllProblemData)
       } catch (error) {
         console.log("Problem on fetching problem data ", error)
       }
@@ -260,7 +271,16 @@ export default function RepresentativeDashboard({ timeAgo }) {
     </div></div>; // You can show a loading spinner or message
   }
 
-
+  const data = [
+    { month: "Jan", solved: 12 },
+    { month: "Feb", solved: 18 },
+    { month: "Mar", solved: 25 },
+    { month: "Apr", solved: 20 },
+    { month: "May", solved: 30 },
+    { month: "Jun", solved: 15 },
+    { month: "Jul", solved: 10 },
+    { month: "Aug", solved: 22 },
+  ];
 
 
 
@@ -272,6 +292,10 @@ export default function RepresentativeDashboard({ timeAgo }) {
       <div className="rep_main_com">
         <div className="slide_rep_con">
           <div className="first_con">
+            {RepsCredit > 8 && <div className="batch">
+              <img src={batch} alt="" />
+            </div>}
+
             <Avatar className='avtar' alt="Remy Sharp" src="https://images.pexels.com/photos/91227/pexels-photo-91227.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" />
             <p>{`${representativeDatas.first_name} ${representativeDatas.last_name}`}</p>
             <span className='status'>{representativeDatas.email}</span>
@@ -317,6 +341,22 @@ export default function RepresentativeDashboard({ timeAgo }) {
             <button className='req_more'>Request More</button>
           </div>
         </div>
+        <div className="chart_con">
+          <Chart />
+
+          <div className="graph1">
+            <h4 className="">Problems Solved Monthly</h4>
+            <ResponsiveContainer width="100%" height="100%">
+              <BarChart data={data}>
+                <CartesianGrid strokeDasharray="3 3" />
+                <XAxis dataKey="month" />
+                <YAxis />
+                <Tooltip />
+                <Bar dataKey="solved" fill="#4f46e5" radius={[6, 6, 0, 0]} />
+              </BarChart>
+            </ResponsiveContainer>
+          </div>
+        </div>
 
         <div className="selector">
           <span className={`active_task ${activeTaskOn == true ? "active_on " : ""}`} onClick={() => setActiveTaskOn(true)}>Active Tasks</span>
@@ -330,15 +370,20 @@ export default function RepresentativeDashboard({ timeAgo }) {
 
                 {
                   problemUnderYourArea.filter(item => item.status != "resolved").map((item, idx) => (
-                    <div key={item._id} className="issue_con" onClick={() => handleOpenDetails(item._id)}>
-                      <div className="issue_name">
-                        <MdOutlineReportProblem className='logo' />
-                        <p className='title'>{(item.title).split(' ')[0]}</p>
+                    <div key={item._id} className="issue_con1" onClick={() => handleOpenDetails(item._id)}>
+                      <div className="fir_up">
+                        <div className="issue_name">
+                          <MdOutlineReportProblem className='logo' />
+                          <p className='title'>{(item.title).split(' ')[0]}</p>
+                        </div>
+                        <span className="priority as">{item.severity}</span>
+                        <span className="status as">{item.status}</span>
+                        <span className="days as">{timeAgo(item.updated_at)}</span>
                       </div>
-                      <span className="priority">{item.severity}</span>
-                      <span className="status">{item.status}</span>
-                      <span className="days">{timeAgo(item.updated_at)}</span>
-                      <MdEdit className="delete" />
+                      <div className="sec_down">
+                        <span className="status as"><FaUserPen className='ic' /><strong className='s'>{item.noOfPerson} </strong>{`person facing same issue`}</span>
+                        <MdEdit className="delete" />
+                      </div>
                     </div>
                   ))
                 }
@@ -389,7 +434,7 @@ export default function RepresentativeDashboard({ timeAgo }) {
                 <h4>Resolved issues</h4>
 
                 {
-                  problemUnderYourArea.filter(item => item.status == 'resolved').map((item, idx) => (
+                  problemUnderYourArea.map((item, idx) => (
                     <div key={item._id} className="issue_con">
                       <div className="issue_name">
                         <MdDone className='logo' />
