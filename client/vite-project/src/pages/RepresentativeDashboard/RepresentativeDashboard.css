@@ -628,6 +628,21 @@
     .first_con,.sec_con,.third_con{
         width: 100%;
     }
+    .chart_con{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: auto;
+        /* border: 3px solid red; */
+        padding: 20px 10px;
+        flex-direction: column;
+    }
+    .graph1{
+        /* border: 3px solid red; */
+        height: 100%;
+        width: 100%;
+    }
 }
 
 
