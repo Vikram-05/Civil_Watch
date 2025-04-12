@@ -134,6 +134,48 @@ export const problemUnderRep = async (request, response) => {
         });
     }
 };
+export const problemUnderUser = async (request, response) => {
+    const { state, district, wardNumber } = request.query;
+
+    try {
+        const query = {
+            state: { $regex: state, $options: "i" },
+            district: { $regex: district, $options: "i" }
+        };
+
+        // Only add wardNumber if it's a valid number
+        if (wardNumber) {
+            const wardNum = parseInt(wardNumber);
+            if (!isNaN(wardNum)) {
+                query.wardNumber = wardNum;
+            } else {
+                return response.status(400).json({
+                    message: "Invalid wardNumber. Must be a number.",
+                    success: false,
+                    error: true
+                });
+            }
+        }
+
+        const AllProblem = await Problem.find(query);
+
+        response.status(200).json({
+            message: 'Problems fetched successfully',
+            AllProblemData: AllProblem,
+            success: true,
+            error: false,
+        });
+
+    } catch (error) {
+        response.status(500).json({
+            message: error.message,
+            success: false,
+            error: true
+        });
+    }
+};
+
+
 export const getProblemData = async (request, response) => {
 
     try {
@@ -205,3 +247,76 @@ export const updateIsSolved = async (request, response) => {
         });
     }
 };
+export const updateUserReport = async (request, response) => {
+    try {
+        const problemId = request.params.id;
+
+        // Find the problem by ID
+        const problemData = await Problem.findById(problemId);
+
+        if (!problemData) {
+            return response.status(404).json({
+                message: "Problem not found",
+                success: false,
+                error: true
+            });
+        }
+
+        // Increment noOfPerson by 1
+        problemData.noOfPerson = (problemData.noOfPerson || 0) + 1;
+
+        // Save the updated document
+        const updatedProblem = await problemData.save();
+
+        response.status(200).json({
+            message: 'You liked the report successfully',
+            data: updatedProblem,
+            success: true,
+            error: false
+        });
+
+    } catch (error) {
+        response.status(500).json({
+            message: error.message,
+            success: false,
+            error: true
+        });
+    }
+};
+export const decrementLike = async (request, response) => {
+    try {
+        const problemId = request.params.id;
+
+        // Find the problem by ID
+        const problemData = await Problem.findById(problemId);
+
+        if (!problemData) {
+            return response.status(404).json({
+                message: "Problem not found",
+                success: false,
+                error: true
+            });
+        }
+
+        // Increment noOfPerson by 1
+        problemData.noOfPerson = (problemData.noOfPerson || 0) - 1;
+
+        // Save the updated document
+        const updatedProblem = await problemData.save();
+
+        response.status(200).json({
+            message: 'Remove Like successfully',
+            data: updatedProblem,
+            success: true,
+            error: false
+        });
+
+    } catch (error) {
+        response.status(500).json({
+            message: error.message,
+            success: false,
+            error: true
+        });
+    }
+};
+
