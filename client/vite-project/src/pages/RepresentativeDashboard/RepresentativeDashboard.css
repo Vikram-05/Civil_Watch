@@ -636,13 +636,13 @@
         flex-direction: column;
     }
     .graph1{
-        border: 3px solid red;
+        /* border: 3px solid red; */
         height: 200px;
         width: 100%;
     }
     .chart_boc{
         width: 100% !important;
-        border: 2px solid red;
+        /* border: 2px solid red; */
     }
 }
 
