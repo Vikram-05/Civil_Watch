@@ -338,7 +338,8 @@ function ReportIssue() {
 
         // Load GeoJSON if not already cached
         if (!cachedGeoJSON) {
-            const response = await fetch("/bbmp_wards.geojson");
+            const response = await fetch(`/bbmp_wards.geojson?nocache=${Date.now()}`);
+
             if (!response.ok) throw new Error("Failed to load ward boundaries");
             cachedGeoJSON = await response.json();
         }
