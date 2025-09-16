@@ -65,11 +65,14 @@
     /* border: 2px solid red; */
     overflow: hidden;
     border-radius: 7px;
-
+    
     & video{
         width: 100%;
+        border: none;
         height: 100%;
         object-fit: cover;
+        /* border: none !important; */
+        /* transform: translateX(30px); */
     }
 }
 @media (width<700px) {

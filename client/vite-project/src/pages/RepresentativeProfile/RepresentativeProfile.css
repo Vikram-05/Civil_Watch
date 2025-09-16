@@ -13,6 +13,7 @@
 }
 
 .profile_det_con {
+    position: relative;
     width: 100%;
     padding: 10px 30px;
     border-radius: 7px;

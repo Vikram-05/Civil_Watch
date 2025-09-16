@@ -23,8 +23,10 @@ import { FaFacebookF } from "react-icons/fa6";
 import { FaTelegramPlane } from "react-icons/fa";
 import { FaTwitter } from "react-icons/fa";
 
+import '../../i18n'
 
 import axios from 'axios';
+import { useTranslation } from 'react-i18next';
 
 function Header() {
   const [isLogin, setIsLogin] = useState(Boolean(localStorage.getItem('token')))
@@ -94,7 +96,7 @@ function Header() {
 
     const getUserData = async (e) => {
       const userId = localStorage.getItem('user_id')
-      const UserData = await axios.get(`https://civil-watch.onrender.com/api/users/${userId}`)
+      const UserData = await axios.get(`${import.meta.env.VITE_BASE_URL}/${userId}`)
       if (UserData.data.role == "representative") {
         setCitizen(false)
       }
@@ -121,22 +123,27 @@ function Header() {
     setIsLogin(false)
   }
 
+    const {t,i18n} = useTranslation()
+
+    const changeLanguage = (lng) => {
+      i18n.changeLanguage(lng)
+    }
 
   return (
     <>
       <div className="contaner">
         <div className="left_header">
-          <Link to="/"><p className='logo'>CivilWatch</p></Link>
-          <Link className='links' to="/"><span><MdOutlineHome className='icon' />Home</span></Link>
-          {(isCitizen == true && isLogin) && <Link to="/reportIssue"  className='links'><span><LuBadgePlus className='icon_drawer' />Report Issue</span></Link>}
-          <Link className='links'><span><IoPeopleSharp className='icon ' />Representatives</span></Link>
+          <Link to="/"><p className='logo'>{t('logoName')}</p></Link>
+          <Link className='links' to="/"><span><MdOutlineHome className='icon' />{t('home')}</span></Link>
+          {(isCitizen == true && isLogin) && <Link to="/reportIssue"  className='links'><span><LuBadgePlus className='icon_drawer' />{t('report Issue')}</span></Link>}
+          <Link className='links'><span><IoPeopleSharp className='icon ' />{t('Representative')}</span></Link>
         </div>
         <div className="right_header">
           {
             !isLogin ?
               (<>
-                <Link to="/Login"><span className='login links' >Log In</span></Link>
-                <Link className='btn_sign links' to="/signup "><span className='signup'>Sign Up</span></Link>
+                <Link to="/Login"><span className='login links' >{t('login')}</span></Link>
+                <Link className='btn_sign links' to="/signup "><span className='signup'>{t('signup')}</span></Link>
               </>)
               :
               (<>
@@ -144,11 +151,17 @@ function Header() {
                   {/* <FaUser className='ico'/> */}
                   <Avatar alt="Remy Sharp" src="https://images.pexels.com/photos/91227/pexels-photo-91227.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" />
                 </Link>
-                <Link className='btn_sign links' to="/login" ><span className='logout' onClick={handleLogout}>Log out</span></Link>
+                <Link className='btn_sign links' to="/login" ><span className='logout' onClick={handleLogout}>{t('logout')}</span></Link>
               </>)
           }
-          {(isCitizen == true && isLogin) && <Link to="/reportIssue" className='links' ><button className='report_btn'>Report Issue</button></Link>}
+          {(isCitizen == true && isLogin) && <Link to="/reportIssue" className='links' ><button className='report_btn'>{t('report Issue')}</button></Link>}
         <RiMenu2Line className='icon_menu' onClick={toggleDrawer('bottom', true)} />
+        <div className="lang" onClick={(e) => {changeLanguage(e.target.value)}}>
+          <select>
+            <option value="en">English</option>
+            <option value="ka">ಕನ್ನಡಿ</option>
+          </select>
+        </div>
         </div>
       </div>
 
@@ -165,6 +178,7 @@ function Header() {
             {list('bottom')}
           </SwipeableDrawer>
         </React.Fragment>
+        
     </div>
       <ToastContainer />
     </>

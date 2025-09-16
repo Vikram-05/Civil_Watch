@@ -5,8 +5,11 @@ import { useNavigate } from 'react-router-dom';
 import './Search.css';
 import axios from 'axios';
 import { ToastContainer } from 'react-toastify';
+import { useTranslation } from 'react-i18next';
+import '../../i18n'
 
 function Search() {
+        const {t,i18n} = useTranslation()
     const [searchData, setSearchData] = useState('');
     const [results, setResults] = useState([]);
     const [loading, setLoading] = useState(false);
@@ -21,7 +24,7 @@ function Search() {
 
             setLoading(true); // Set loading to true
             try {
-                const response = await axios.get('https://civil-watch.onrender.com/api/users', {
+                const response = await axios.get(`${import.meta.env.VITE_BASE_URL}`, {
                     params: {
                         first_name: searchData,
                         last_name: searchData,
@@ -54,7 +57,7 @@ function Search() {
                 <input
                     value={searchData}
                     type="text"
-                    placeholder="Search representatives by name , location"
+                    placeholder={t('Searchrepresentativesbynamelocation')}
                     onChange={(e) => setSearchData(e.target.value)}
                 />
                 <IoSearchOutline className="search_icon" />

@@ -19,7 +19,6 @@
 
 select {
     width: 100%;
-    /* height: 30px; */
     color: rgba(62, 62, 62, 0.816);
     padding: 5px 10px;
     font-size: 14px;
@@ -30,6 +29,7 @@ select {
     background-color: #c2c0c037;
     margin-top: 5px;
     cursor: pointer;
+    height: 40px;
 }
 
 option {
@@ -44,34 +44,33 @@ option {
     }
 }
 select option:hover {
-    background-color: red;
     color: white; /* Optional: Changes text color when hovering */
-  }
+}
 
 .dec_box {
     display: flex;
     align-items: start;
     justify-content: center;
     flex-direction: column;
-
-
+    
+    
     & span {
-        margin-top: 20px;
+        margin-top: 10px;
         width: 100%;
-
+        
     }
-
-
-        &::placeholder {
-            height: 100%;
-            font-weight: 500;
-            font-size: 14px;
-        }
+    
+    
+    &::placeholder {
+        height: 100%;
+        font-weight: 500;
+        font-size: 14px;
+    }
 }
 
 .location_title {
     display: inline-block;
-    margin-top: 20px;
+    margin-right: 20px;
 }
 
 .location_box {
@@ -84,7 +83,9 @@ select option:hover {
     border-radius: 5px;
     overflow: hidden;
     background-color: #c2c0c037;
-
+    margin-top: 10px;
+    
+    
     & input {
         width: 97%;
         height: 100%;
@@ -92,6 +93,7 @@ select option:hover {
         border: none;
         outline: none;
         background-color: transparent;
+        
 
         &::placeholder {
             font-weight: 500;
@@ -116,11 +118,14 @@ select option:hover {
     background-color: #8ac5e774;
     border-radius: 5px;
     font-weight: 500;
-    cursor: pointer;
+    cursor: pointer;  
+    
+    
 }
 
 .level_con {
     margin-top: 20px;
+    
 
     & .level {
         display: block;
@@ -169,6 +174,7 @@ select option:hover {
         align-items: center;
         justify-content: start;
         gap: 20px;
+        
 
         & .submit{
             padding: 5px 20px;
@@ -180,10 +186,10 @@ select option:hover {
             cursor: pointer;
             position: relative;
             overflow: hidden;
-            &:hover::after{
+            /* &:hover::after{
                 bottom: 0%;
-            }
-            &::after{
+            } */
+            /* &::after{
                 content: "Submit Report";
                 position: absolute;
                 bottom: -100%;
@@ -197,7 +203,7 @@ select option:hover {
                 align-items: center;
                 justify-content: center;
                 font-weight: 450;
-            }
+            } */
 
         }
         & .edit{
@@ -234,7 +240,7 @@ select option:hover {
 }
 .dec_box textarea {
     width: 100%;
-    height: 200px; 
+    height: 90px; 
     padding: 10px; 
     resize: none; 
     background-color: #c2c0c037;
@@ -261,10 +267,9 @@ select option:hover {
     & .image_preview{
         /* border: 2px solid red; */
         margin-top: 10px;
-        height: 200px;
+        height: 150px;
         width: 100%;
         aspect-ratio: 1;
-        padding: 5px  5px 5px 0;
         display: flex;
         align-items: start;
         justify-content: start;
@@ -282,13 +287,173 @@ select option:hover {
         & img{
             border-radius: 10px;
             overflow: hidden;
-            min-width:  180px;
+            width: 100%;
             height: 100%;
-            object-fit: cover;
-            border: 1px solid #00000044;
+            object-fit: contain;
+            /* border: 1px solid #00000044; */
+        }
+        & .image_container{
+            border: 1px solid #6a6a6a;
+            border-radius: 5px;
+            min-width:  180px;
+            max-width: 180px;
+            height: 100%;
+            overflow: hidden;
+            position: relative ;
+        }
+        & .remove_image{
+            /* border: 5px solid red; */
+            position: absolute;
+            top: 0;
+            right: 0;
+            z-index: 88;
+            width: 30px;
+            height: 30px;
+            background-color: #a262ecda;
+            border: none;
+            border-radius: 10px;
+            font-size: 25px;
+            font-weight: 400;
+            cursor: pointer;
+            color: #2b0062;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all ease 0.25s;
+            &:hover{
+                background-color: #6c3dd2;
+            }
         }
     }
 }
+button{
+    cursor: pointer;
+}
+.slide_con1{
+}
+.info1{
+    font-size: 10px;
+    text-align: end;
+}
+.description1{
+    font-size: 12px;
+    text-align: start;
+    max-height:300px ;
+    overflow-y: scroll;
+}
+.card {
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    /* border: 3px solid red; */
+    width: 100%;
+}
+.slideshow-container {
+    position: relative;
+    width: 100%;
+    height: 180px;
+    overflow: hidden;
+    & img{
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+    }
+}
+.upvote.liked {
+    color: #4CAF50; /* Green color for liked items */
+    cursor: not-allowed;
+}
+
+.upvote.liked svg {
+    fill: #4CAF50;
+}
+.slides {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: none;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+.details {
+    padding: 10px 14px 50px;
+}
+.details h3 {
+    margin: 0 0 8px;
+    font-size: 16px;
+    color: #333;
+}
+.details .info {
+    margin-bottom: 4px;
+    display: flex;
+    justify-content: space-between;
+    color: #666;
+    font-size: 13px;
+}
+.details .description {
+    margin-top: 8px;
+    color: #444;
+    line-height: 1.4;
+    font-size: 13px;
+}
+.upvote {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    cursor: pointer;
+    background: #f7f7f7;
+    border-top: 1px solid #e0e0e0;
+    transition: background-color 0.3s;
+}
+.upvote svg {
+    width: 16px;
+    height: 16px;
+    fill: #ff4500;
+    transition: transform 0.2s, filter 0.3s;
+}
+.upvote:hover svg {
+    transform: scale(1.2);
+}
+.upvote span {
+    margin-left: 6px;
+    font-size: 14px;
+    color: #333;
+}
+.upvote.liked {
+    background-color: #ff4500;
+}
+.upvote.liked svg {
+    filter: invert(1);
+}
+.upvote.liked span {
+    color: #fff;
+}
+.nav-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0.8);
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    z-index: 2;
+    border-radius: 50%;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+.nav-button:hover {
+    background: rgba(255, 255, 255, 1);
+}
+
 .loc_info{
     /* border: 2px solid; */
     margin: 20px 0;
@@ -304,7 +469,9 @@ select option:hover {
         height: 100%;
         display: flex;
         align-items: center;
-        justify-content: space-between;
+        justify-content: start;
+        /* background-color: rebeccapurple; */
+        /* padding-right: 20px; */
         gap: 10px;
     }
     & span{
@@ -312,7 +479,7 @@ select option:hover {
         height: 100%;
         font-size: 13.5px;
         font-weight: 450;
-        width: 25%;
+        width: 70px;
         display: flex;
         align-items: center;
         justify-content: start;
@@ -326,6 +493,7 @@ select option:hover {
         border: none;
         outline: none;
         background-color: #c2c0c037;
+        
     }
 }
 input[type=file]::file-selector-button {
@@ -364,3 +532,50 @@ input[type=file]::file-selector-button:hover {
         height: 100px !important;
     }
   }
+
+  
+  .lds-dual-ring,
+  .lds-dual-ring:after {
+    box-sizing: border-box;
+  }
+  .lds-dual-ring {
+    display: inline-block;
+    width: 97px;
+    height: 10px;
+  }
+  .lds-dual-ring:after {
+    content: " ";
+    display: block;
+    width: 20px;
+    height: 20px;
+    /* border: 5px solid red !important; */
+    margin: -5px 37px;
+    border-radius: 50%;
+    border: 3.4px solid currentColor;
+    border-color: currentColor transparent currentColor transparent;
+    animation: lds-dual-ring 1.2s linear infinite;
+  }
+  @keyframes lds-dual-ring {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+  
+.imgDesc{
+    font-size: 13px;
+    color: #111111;
+    font-weight: 400;
+    padding: 5px 20px;
+    height: 200px;
+    overflow-y: scroll;
+    width: 100%;
+}
+.loadingDes{
+    width: 100%;
+    font-weight: 500;
+    text-align: center;
+    color: #232323;
+}

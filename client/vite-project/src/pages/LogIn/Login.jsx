@@ -24,7 +24,7 @@ function Login() {
             email: values.email,
         };
         try {
-            const response = await axios.post('https://civil-watch.onrender.com/api/users/login', formData);
+            const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/login`, formData);
             // Save token after successful login
             const token = response.data.token;
             const user_id = response.data.user_id;

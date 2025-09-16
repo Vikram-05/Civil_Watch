@@ -42,6 +42,11 @@ const problemSchema = mongoose.Schema({
   images: [{
     type: String
   }],
+  noOfPerson :{
+    default:1,
+    type : Number,
+    required : false
+  },
   severity: {
     type: String,
     enum: ['low', 'medium', 'high'],

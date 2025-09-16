@@ -17,8 +17,11 @@ import { TbSunElectricity } from "react-icons/tb";
 import { FaHandHoldingWater } from "react-icons/fa";
 
 import {Link} from 'react-router-dom'
+import '../../i18n'
+import { useTranslation } from 'react-i18next';
 
 function ReportCategory() {
+        const {t,i18n} = useTranslation()
     const [isLogin,setIsLogin] = useState(false);
     const token = localStorage.getItem('token');
     useEffect(()=>{
@@ -32,7 +35,7 @@ function ReportCategory() {
     return (
         <>
             <div className="category_contaner">
-                <h4>report category</h4>
+                <h4>{t('reportcategory')}</h4>
                 <Swiper
                     slidesPerView={4}
                     spaceBetween={10}
@@ -65,8 +68,8 @@ function ReportCategory() {
                             <div className="icon_con">
                             <IoTrashSharp/>
                             </div>
-                            <span>Waste</span>
-                            <p>Sanitation issues</p>
+                            <span>{t('Waste')}</span>
+                            <p>{t('Sanitation')} {t('issues')} </p>
                         </Link>
                     </SwiperSlide>
 
@@ -78,56 +81,32 @@ function ReportCategory() {
                             <div className="icon_con">
                             <FaRoad/>
                             </div>
-                            <span>Road</span>
-                            <p>infrastructure</p>
+                            <span>{t('Road')}</span>
+                            <p>{t('infrastructure')}</p>
                         </Link>
                     </SwiperSlide><SwiperSlide>
                         <Link to={ isLogin == true ? "/reportIssue" : '/login'} className="slide_con">
                             <div className="icon_con">
                             <TbSunElectricity/>
                             </div>
-                            <span>electricity</span>
-                            <p>power outage</p>
+                            <span>{t('Electricity')}</span>
+                            <p>{t('poweroutage')}</p>
                         </Link>
                     </SwiperSlide><SwiperSlide>
                         <Link to={ isLogin == true ? "/reportIssue" : '/login'} className="slide_con">
                             <div className="icon_con">
                             <FaHandHoldingWater/>
                             </div>
-                            <span>water</span>
-                            <p>supply issue</p>
+                            <span>{t('Animalcontrol')}</span>
+                            <p>{t('Animalcontrol')} {t('issues')}</p>
                         </Link>
                     </SwiperSlide><SwiperSlide>
                         <Link to={ isLogin == true ? "/reportIssue" : '/login'} className="slide_con">
                             <div className="icon_con">
-                            <IoTrashSharp/>
+                            <FaHandHoldingWater/>
                             </div>
-                            <span>Waste</span>
-                            <p>Sanitation issues</p>
-                        </Link>
-                    </SwiperSlide><SwiperSlide>
-                        <Link to={ isLogin == true ? "/reportIssue" : '/login'} className="slide_con">
-                            <div className="icon_con">
-                            <IoTrashSharp/>
-                            </div>
-                            <span>Waste</span>
-                            <p>Sanitation issues</p>
-                        </Link>
-                    </SwiperSlide><SwiperSlide>
-                        <Link to={ isLogin == true ? "/reportIssue" : '/login'} className="slide_con">
-                            <div className="icon_con">
-                            <IoTrashSharp/>
-                            </div>
-                            <span>Waste</span>
-                            <p>Sanitation issues</p>
-                        </Link>
-                    </SwiperSlide><SwiperSlide>
-                        <Link to={ isLogin == true ? "/reportIssue" : '/login'} className="slide_con">
-                            <div className="icon_con">
-                            <IoTrashSharp/>
-                            </div>
-                            <span>Waste</span>
-                            <p>Sanitation issues</p>
+                            <span>{t('Sanitation')}</span>
+                            <p>{t('Sanitation')} {t('issues')}</p>
                         </Link>
                     </SwiperSlide>
 

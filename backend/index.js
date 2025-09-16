@@ -11,8 +11,10 @@ import connectDB from './config/connectDB.js'
 import userRoutes from './routes/userRoutes.js'
 import problemRoutes from './routes/problemRoutes.js'
 import creditRoute from './routes/creditRoute.js'
+import mapapi from './routes/mapaip.js'
 
 import morgan from 'morgan';
+import fileUpload from 'express-fileupload';
 
 const app = express()
 
@@ -24,10 +26,16 @@ app.use(morgan())
 app.use(helmet({
     crossOriginResourcePolicy : false
 }))
+app.use(fileUpload({
+    useTempFiles : true,
+    tempFileDir : '/tmp/'
+}));
+
 
 app.use('/api/users', userRoutes);
 app.use('/api/users/problem', problemRoutes);
 app.use('/api/users/credit', creditRoute);
+app.use('/api/users/map', mapapi);
 
 // app.get("/",(request,response)=>{
 //     response.json({

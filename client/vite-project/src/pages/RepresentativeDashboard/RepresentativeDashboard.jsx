@@ -10,13 +10,27 @@ import { MdDone } from "react-icons/md";
 import { AiOutlineLike } from "react-icons/ai";
 import Avatar from '@mui/material/Avatar';
 import CountUp from 'react-countup';
+import Chart from '../../components/chart/Chart';
 
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import { IoClose } from "react-icons/io5";
 import { toast, ToastContainer } from 'react-toastify';
+import { FaUserPen } from "react-icons/fa6";
+import batch from '../../../public/batch1.png'
+import Markdown from 'react-markdown';
 
 import axios from 'axios';
+
+import {
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  ResponsiveContainer,
+} from "recharts";
 
 const style = {
   position: 'absolute',
@@ -57,7 +71,7 @@ export default function RepresentativeDashboard({ timeAgo }) {
       first_name: updateData.firstName,
       last_name: updateData.lastName
     }
-    const response = await axios.post(`https://civil-watch.onrender.com/api/users/editprofile/${user_id}`, formData)
+    const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/editprofile/${user_id}`, formData)
     toast("Update Seccessful")
     handleClose()
     setrepresentativeDatas((prevData) => ({
@@ -84,13 +98,13 @@ export default function RepresentativeDashboard({ timeAgo }) {
   })
   const [problemUnderYourArea, setProblemUnderYourArea] = useState([]);
   const [AllReview, setAllReview] = useState([])
-  const [reviewUsers, setReviewUsers] = useState({}); 
+  const [reviewUsers, setReviewUsers] = useState({});
 
   useEffect(() => {
     const userId = localStorage.getItem('user_id')
     const repData = async (e) => {
       try {
-        const response = await axios.get(`https://civil-watch.onrender.com/api/users/${userId}`)
+        const response = await axios.get(`${import.meta.env.VITE_BASE_URL}/${userId}`)
         // console.log("res : ", response.data)
         setrepresentativeDatas({
           email: response.data.email,
@@ -109,9 +123,8 @@ export default function RepresentativeDashboard({ timeAgo }) {
 
     const problemsUnderYou = async (e) => {
       try {
-        const response = await axios.get(`https://civil-watch.onrender.com/api/users/problem/problemUnderRep/${userId}`)
+        const response = await axios.get(`${import.meta.env.VITE_BASE_URL}/problem/problemUnderRep/${userId}`)
         setProblemUnderYourArea(response.data.AllProblemData)
-        // console.log("problem Data : ", response.data.AllProblemData)
       } catch (error) {
         console.log("Problem on fetching problem data ", error)
       }
@@ -123,7 +136,7 @@ export default function RepresentativeDashboard({ timeAgo }) {
       const user_id = localStorage.getItem('user_id')
       let total = 0;
       try {
-        const res = await axios.get(`https://civil-watch.onrender.com/api/users/credit/getSimilarRep/${user_id}`)
+        const res = await axios.get(`${import.meta.env.VITE_BASE_URL}/credit/getSimilarRep/${user_id}`)
         // setRepCredit(res.data)
         for (let score of res.data.AllRepresentative) {
           total += score.credit_score;
@@ -137,39 +150,39 @@ export default function RepresentativeDashboard({ timeAgo }) {
     }
     AllRep()
 
-    
+
 
     const handleAllReviews = async () => {
-    const user_id = localStorage.getItem('user_id')
-    try {
-      const res = await axios.get(`https://civil-watch.onrender.com/api/users/credit/getSimilarRep/${user_id}`);
-      setAllReview(res.data.AllRepresentative);
+      const user_id = localStorage.getItem('user_id')
+      try {
+        const res = await axios.get(`${import.meta.env.VITE_BASE_URL}/credit/getSimilarRep/${user_id}`);
+        setAllReview(res.data.AllRepresentative);
 
-      // Create a list of promises to fetch user data for each review
-      const userNamesPromises = res.data.AllRepresentative.map(async (review) => {
-        const userRes = await axios.get(`https://civil-watch.onrender.com/api/users/${review.user_id}`);
-        return { userId: review.user_id, name: `${userRes.data.first_name} ${userRes.data.last_name}` };
-      });
+        // Create a list of promises to fetch user data for each review
+        const userNamesPromises = res.data.AllRepresentative.map(async (review) => {
+          const userRes = await axios.get(`${import.meta.env.VITE_BASE_URL}/${review.user_id}`);
+          return { userId: review.user_id, name: `${userRes.data.first_name} ${userRes.data.last_name}` };
+        });
 
-      // Wait for all the user data to be fetched
-      const userNamesData = await Promise.all(userNamesPromises);
+        // Wait for all the user data to be fetched
+        const userNamesData = await Promise.all(userNamesPromises);
 
-      // Create a user lookup object
-      const userNames = userNamesData.reduce((acc, { userId, name }) => {
-        acc[userId] = name;
-        return acc;
-      }, {});
+        // Create a user lookup object
+        const userNames = userNamesData.reduce((acc, { userId, name }) => {
+          acc[userId] = name;
+          return acc;
+        }, {});
 
-      setReviewUsers(userNames);
+        setReviewUsers(userNames);
 
-    } catch (error) {
-      console.log("Error in fetching reviews: ", error);
-    }
-  };
+      } catch (error) {
+        console.log("Error in fetching reviews: ", error);
+      }
+    };
 
-  handleAllReviews();
-    
-    
+    handleAllReviews();
+
+
   }, [])
 
 
@@ -195,9 +208,9 @@ export default function RepresentativeDashboard({ timeAgo }) {
   // Function to open the modal for a specific task
   const handleOpenDetails = async (taskId) => {
     setOpenDetails(taskId);
-    const problemData = await axios.get(`https://civil-watch.onrender.com/api/users/problem/getProblemData/${taskId}`)
+    const problemData = await axios.get(`${import.meta.env.VITE_BASE_URL}/problem/getProblemData/${taskId}`)
     const { description, district, location, severity, state, status, title, wardNumber, user_id, images } = problemData.data.data;
-    const UserData = await axios.get(`https://civil-watch.onrender.com/api/users/${user_id}`)
+    const UserData = await axios.get(`${import.meta.env.VITE_BASE_URL}/${user_id}`)
     const { email, first_name, last_name } = UserData.data
     setDetailData({
       description: description,
@@ -215,7 +228,7 @@ export default function RepresentativeDashboard({ timeAgo }) {
       email: email
     })
 
-    // console.log("pro data user: ", UserData.data)
+    console.log("pro data user: ", detailData)
   };
 
   // Function to close the modal
@@ -230,7 +243,7 @@ export default function RepresentativeDashboard({ timeAgo }) {
     try {
       const assignToId = localStorage.getItem('user_id')
 
-      const response = await axios.put(`https://civil-watch.onrender.com/api/users/problem/updateStatus/${problem_id}`, { status: status, assignTo_id: assignToId });
+      const response = await axios.put(`${import.meta.env.VITE_BASE_URL}/problem/updateStatus/${problem_id}`, { status: status, assignTo_id: assignToId });
 
 
       setProblemUnderYourArea(prevState =>
@@ -249,19 +262,28 @@ export default function RepresentativeDashboard({ timeAgo }) {
   };
   if (!representativeDatas) {
     return <div className='loader_con'><div class="dot-spinner">
-        <div class="dot-spinner__dot"></div>
-        <div class="dot-spinner__dot"></div>
-        <div class="dot-spinner__dot"></div>
-        <div class="dot-spinner__dot"></div>
-        <div class="dot-spinner__dot"></div>
-        <div class="dot-spinner__dot"></div>
-        <div class="dot-spinner__dot"></div>
-        <div class="dot-spinner__dot"></div>
+      <div class="dot-spinner__dot"></div>
+      <div class="dot-spinner__dot"></div>
+      <div class="dot-spinner__dot"></div>
+      <div class="dot-spinner__dot"></div>
+      <div class="dot-spinner__dot"></div>
+      <div class="dot-spinner__dot"></div>
+      <div class="dot-spinner__dot"></div>
+      <div class="dot-spinner__dot"></div>
     </div></div>; // You can show a loading spinner or message
-}
+  }
 
+  const data = [
+    { month: "Jan", solved: 12 },
+    { month: "Feb", solved: 18 },
+    { month: "Mar", solved: 25 },
+    { month: "Apr", solved: 20 },
+    { month: "May", solved: 30 },
+    { month: "Jun", solved: 15 },
+    { month: "Jul", solved: 10 },
+    { month: "Aug", solved: 22 },
+  ];
 
-  
 
 
 
@@ -272,6 +294,10 @@ export default function RepresentativeDashboard({ timeAgo }) {
       <div className="rep_main_com">
         <div className="slide_rep_con">
           <div className="first_con">
+            {RepsCredit > 8 && <div className="batch">
+              <img src={batch} alt="" />
+            </div>}
+
             <Avatar className='avtar' alt="Remy Sharp" src="https://images.pexels.com/photos/91227/pexels-photo-91227.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" />
             <p>{`${representativeDatas.first_name} ${representativeDatas.last_name}`}</p>
             <span className='status'>{representativeDatas.email}</span>
@@ -306,7 +332,7 @@ export default function RepresentativeDashboard({ timeAgo }) {
           </div>
           <div className="sec_con">
             <FaRegStar className='icon_rep' />
-            <p className="creditScore">Public Trust Score : <CountUp end={RepsCredit} duration={1.5} delay={1.5}/></p>
+            <p className="creditScore">Public Trust Score : <CountUp end={RepsCredit} duration={1.5} delay={1.5} /></p>
             <span><div className="solve_issue">{`Based on ${problemUnderYourArea.filter(item => item.status == "resolved").length} resolved issues`}</div></span>
             <button className='view_his'>View History</button>
           </div>
@@ -315,6 +341,22 @@ export default function RepresentativeDashboard({ timeAgo }) {
             <p className="active_task">{`${problemUnderYourArea.filter(item => item.status != "resolved").length} pending Issues`}</p>
             <span className='priority'>{`${problemUnderYourArea.filter(item => (item.severity == "high" && item.status != "resolved")).length} high priority`} </span>
             <button className='req_more'>Request More</button>
+          </div>
+        </div>
+        <div className="chart_con">
+          <Chart />
+
+          <div className="graph1">
+            <h4 className="">Problems Solved Monthly</h4>
+            <ResponsiveContainer width="100%" height="100%">
+              <BarChart data={data}>
+                <CartesianGrid strokeDasharray="3 3" />
+                <XAxis dataKey="month" />
+                <YAxis />
+                <Tooltip />
+                <Bar dataKey="solved" fill="#4f46e5" radius={[6, 6, 0, 0]} />
+              </BarChart>
+            </ResponsiveContainer>
           </div>
         </div>
 
@@ -330,15 +372,20 @@ export default function RepresentativeDashboard({ timeAgo }) {
 
                 {
                   problemUnderYourArea.filter(item => item.status != "resolved").map((item, idx) => (
-                    <div key={item._id} className="issue_con" onClick={() => handleOpenDetails(item._id)}>
-                      <div className="issue_name">
-                        <MdOutlineReportProblem className='logo' />
-                        <p className='title'>{(item.title).split(' ')[0]}</p>
+                    <div key={item._id} className="issue_con1" onClick={() => handleOpenDetails(item._id)}>
+                      <div className="fir_up">
+                        <div className="issue_name">
+                          <MdOutlineReportProblem className='logo' />
+                          <p className='title'>{(item.title).split(' ')[0]}</p>
+                        </div>
+                        <span className="priority as">{item.severity}</span>
+                        <span className="status as">{item.status}</span>
+                        <span className="days as">{timeAgo(item.updated_at)}</span>
                       </div>
-                      <span className="priority">{item.severity}</span>
-                      <span className="status">{item.status}</span>
-                      <span className="days">{timeAgo(item.updated_at)}</span>
-                      <MdEdit className="delete" />
+                      <div className="sec_down">
+                        <span className="status as"><FaUserPen className='ic' /><strong className='s'>{item.noOfPerson} </strong>{`person facing same issue`}</span>
+                        <MdEdit className="delete" />
+                      </div>
                     </div>
                   ))
                 }
@@ -362,13 +409,11 @@ export default function RepresentativeDashboard({ timeAgo }) {
                       <h4 className='issue'>Priority : </h4>
                       <span>{detailData.severity}</span>
                       <h4 >Discription : </h4>
-                      <span className='disc'>{detailData.description}</span>
-
+                      <span className='disc'><Markdown>{detailData.description}</Markdown></span>
                       <div className="all_img">
-                        <img src="https://tse3.mm.bing.net/th?id=OIP.a_NBaDZCwiV6fKa7XJ6B9AHaEK&pid=Api&P=0&h=180" alt="" />
-                        <img src="https://tse3.mm.bing.net/th?id=OIP.a_NBaDZCwiV6fKa7XJ6B9AHaEK&pid=Api&P=0&h=180" alt="" />
-                        <img src="https://tse3.mm.bing.net/th?id=OIP.a_NBaDZCwiV6fKa7XJ6B9AHaEK&pid=Api&P=0&h=180" alt="" />
-                        <img src="https://tse3.mm.bing.net/th?id=OIP.a_NBaDZCwiV6fKa7XJ6B9AHaEK&pid=Api&P=0&h=180" alt="" />
+                        {detailData.images.map((img, idx) => (
+                          <img key={idx} src={img} alt={`Issue image ${idx + 1}`} />
+                        ))}
                       </div>
                       <h4 className='issue'>Current Status : </h4>
                       <span>{detailData.status}</span>
@@ -391,7 +436,7 @@ export default function RepresentativeDashboard({ timeAgo }) {
                 <h4>Resolved issues</h4>
 
                 {
-                  problemUnderYourArea.filter(item => item.status == 'resolved').map((item, idx) => (
+                  problemUnderYourArea.map((item, idx) => (
                     <div key={item._id} className="issue_con">
                       <div className="issue_name">
                         <MdDone className='logo' />
@@ -419,7 +464,7 @@ export default function RepresentativeDashboard({ timeAgo }) {
                 <div className="avtar_det">
                   <p className="name">{reviewUsers[item.user_id]}</p>
                   <span className="message">{(item.feedback).split(' ').length > 10 ? item.feedback.split(' ').slice(0, 6).join(' ') + "..." : item.feedback}<span className="credit_score">{`|  credit Score :  +${item.credit_score}`}</span></span>
-                  
+
                 </div>
                 <AiOutlineLike className='like' />
               </div>
